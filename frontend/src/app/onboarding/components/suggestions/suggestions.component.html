@@ -1,0 +1,71 @@
+<div class="flex-page" *ngIf="!loading && !error">
+    <div class="flex-btw top-section">
+        <div class="profile">
+            <img class="profile-pic" *ngIf="profilePic != null" [src]="imageUrl + profilePic" alt="avatar.svg">
+            <img class="profile-pic" *ngIf="profilePic == null" src="/assets/images/nomad.svg" alt="avatar.svg">
+        </div>
+    
+        <div class="main-text">
+            <div>Hi <span class="uppercase-text">{{firstname}}</span>,</div>
+            <div>here are some friends you might want to follow.</div>
+        </div>
+    </div>
+    
+    <div class="flex-btw mt-3 scroll-height" *ngIf="suggestions.length > 0" [style.height.px]="innerHeight">
+        <div *ngFor="let suggestion of suggestions" class="mb-1 section-width flex-btw">
+            <div class="profile-image">
+                <img class="image-avatar" *ngIf="suggestion.profile_img != null" 
+                [src]="imageUrl + suggestion.profile_img" alt="suggestion.png">
+                <img class="image-avatar" *ngIf="suggestion.profile_img == null" 
+                src="/assets/images/nomad.svg" alt="nosuggestion.png">
+            </div>
+            <div class="text">
+                <div class="name">
+                    {{suggestion?.first_name ? suggestion?.first_name + ' ' + suggestion?.last_name : suggestion?.school_name}}
+                </div>
+                <div class="view-profile">
+                    View Profile
+                </div>
+            </div>
+    
+            <div [ngClass]="{'follow': suggestion, 'following': suggestion?.follow == 1}" 
+            (click)="followToggle(suggestion)">
+                {{suggestion.follow == 1 ? 'following' : 'follow'}}
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4" *ngIf="suggestions.length <= 0">
+        <app-empty-state [message]="'No suggestions'"></app-empty-state>
+    </div>
+    
+    <div class="flex-btw mt-4 button-spacing">
+        <button class="general-btn-style" (click)="back()" color="primary" mat-flat-button>
+            Back
+        </button>
+
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+    
+        <button (click)="next()" [disabled]="finishLoading" class="general-btn-style" color="primary" mat-flat-button>
+            <span *ngIf="finishLoading" class="spinner-positioning">
+                <mat-progress-spinner
+                diameter="30"
+                color="primary"
+                mode="indeterminate">
+                </mat-progress-spinner>
+            </span>
+            <span *ngIf="!finishLoading">Finish</span>
+        </button>
+    </div>
+</div>
+
+<div class="mt-4" *ngIf="!loading && error">
+    <app-error-state [message]="message" (retry)="getSuggestions()"></app-error-state>
+</div>
+
+<div class="mt-4" *ngIf="loading">
+    <app-app-loader></app-app-loader>
+</div>

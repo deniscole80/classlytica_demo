@@ -1,0 +1,151 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/mixins.scss";
+
+.main-text{
+    font-weight: 700;
+    font-size: 13px;
+    text-align: center;
+    line-height: 20px;
+    color: $primary-color;
+}
+
+.flex-image{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.uppercase-text{
+    text-transform: uppercase;
+}
+
+.mid-arrangement{
+    background-color: #0F4C8D;
+    padding: 15px;
+    background-repeat: no-repeat;
+    // background-size: 100% 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.image-section{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.image-circle{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #DBDBDB;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+   background-repeat: inherit;
+    background-size: contain;
+}
+
+::ng-deep .interest-form{
+    &.mat-form-field-appearance-fill .mat-form-field-flex {
+        border-radius: 10px !important;
+        padding: 4px 15px !important;
+        background-color: #E7EDF4;
+    }
+
+    .mat-form-field-underline {
+        width: 0 !important;
+    }
+    
+    &.mat-form-field-appearance-fill .mat-form-field-infix {
+        padding: 0.45em 0.25em 0.75em 0.45em !important;
+        font-size: 12px;
+    }
+}
+
+.grey-camera{
+    cursor: pointer;
+}
+
+.blue-camera{
+    cursor: pointer;
+    // z-index: 999999;
+}
+
+.general-btn-style{
+    border-radius: 10px;
+    padding: 4px 0;
+    border-radius: 10px;
+    padding: 4px 0;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100px;
+}
+
+.button-spacing{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog{
+    display: none;
+    position: absolute;
+    bottom: 0;
+    padding: 24px;
+    border-radius: 4px;
+    overflow: auto;
+    outline: 0;
+    width: 70%;
+    height: 30%;
+    margin: 0 auto;
+    z-index: 999;
+    left: 15%;
+
+    box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+    background: white;
+    color: rgba(0, 0, 0, 0.87);
+
+    @include respond (tab-land){
+        width: 80%;
+        left: 10%;
+    }
+
+    @include respond (tab-port){
+        width: 95%;
+        left: 2.5%;
+    }
+    
+    @include respond (big-phone){
+        height: 90%;
+    }
+}
+
+.slide-up{
+    display: block;
+    animation: slide 1.5s;
+}
+
+.slide-down{
+    animation: slide-down 2s;
+}
+
+@keyframes slide {
+    0%{
+        margin-bottom: -300px;
+    }
+    100%{
+        margin-bottom: 0px;
+    }
+}
+
+@keyframes slide-down {
+    0%{
+        margin-bottom: 0px;
+    }
+    100%{
+        margin-bottom: -300px;
+        display: none;
+    }
+}

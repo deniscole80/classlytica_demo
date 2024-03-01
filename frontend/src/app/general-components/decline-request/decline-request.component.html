@@ -1,0 +1,21 @@
+<div class="wrap flex-center">
+    <div class="warn">
+        <img src="assets/images/warning.svg" style="width: 100%;" alt="warning">
+    </div>
+
+    <div class="text">
+        You are about to <span>{{data.action}}</span> employment request from <span>{{data.name}}</span>
+    </div>
+
+    <div class="full-width">
+        <mat-form-field appearance="outline" class="sort-form full-width">
+            <textarea name="reason" [(ngModel)]="reason" cols="30" rows="6" matInput></textarea>
+        </mat-form-field>
+    </div>
+
+    <div class="flex-center mt-2">
+        <button mat-flat-button class="action-but" color="primary" (click)="accept()">{{data.action | titlecase}}</button>
+        &nbsp; 
+        <button mat-flat-button class="action-but" color="primary" (click)="close()">Close</button>
+    </div>
+</div>

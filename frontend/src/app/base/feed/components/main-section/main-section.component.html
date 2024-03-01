@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="flex-end">
+        <div (click)="searchUser()">
+            <mat-form-field appearance="outline" class="top-search">
+                <span matSuffix style="position: relative">
+                    <img src="assets/images/search.svg" width="15" alt="" />
+                    &nbsp;
+                </span>
+                <input matInput placeholder="Search" style="font-size: 12px; cursor: pointer" class="inline-search" />
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="heading">Feed</div>
+
+    <div class="mt-1">
+        <input matInput (click)="addComment()" placeholder="Share your thoughts..." class="comment-input" />
+    </div>
+
+    <div class="mt-1 flex-upload">
+        <div class="flex-el image-width" style="cursor: pointer" (click)="addPhoto()">
+            <img src="assets/images/image_upload.svg" />
+            &nbsp; &nbsp;
+            <div class="text-font">Upload Image</div>
+        </div>
+
+        <div class="flex-el video-width" style="cursor: pointer" (click)="addVideo()">
+            <img src="assets/images/video_upload.svg" />
+            &nbsp; &nbsp;
+            <div class="text-font">Upload Video (not more that 2 minutes)</div>
+        </div>
+    </div>
+</div>

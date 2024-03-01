@@ -1,0 +1,27 @@
+<div class="container mt-2">
+    <div class="flex-btw">
+        <div>
+            <div class="name-text">
+                {{lastName ? firstName + ' ' + lastName : firstName}}
+            </div>
+
+            <div class="username-text">
+                @{{userName}}
+            </div>
+        </div>
+
+        <div>
+            <mat-icon routerLink="/app/profile" color="primary" style="cursor: pointer;">cancel</mat-icon>
+        </div>
+    </div>
+
+    <div class="mt-1 custom-scroll-bar" *ngIf="userType == 1">
+        <app-complete-school></app-complete-school>
+    </div>
+    
+    <div class="mt-1 custom-scroll-bar" *ngIf="userType == 2">
+        <app-complete-user></app-complete-user>
+    </div>
+</div>
+
+

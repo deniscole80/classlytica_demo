@@ -1,0 +1,184 @@
+<div class="flex-end">
+    <div>
+        <mat-icon style="cursor: pointer;" (click)="closeModal()" color="warn">
+            close
+        </mat-icon>
+    </div>
+</div>
+
+<div class="comment-scroll custom-scroll-bar" [style.height.px]="innerHeight">
+
+    <div>
+        <div *ngIf="selectedRow?.post_type == 'shared'" class="share-section flex-el mb-1">
+            <img width="11" src="assets/images/share_solid.svg" alt=""> &nbsp;
+            Shared by {{selectedRow?.shared_by_username ? selectedRow?.shared_by_username : 'Unknown'}}
+        </div>
+        <div class="flex-top">
+            <div class="flex-el">
+                <div (click)="userProfile(selectedRow?.user_id, selectedRow?.user_type)" style="cursor: pointer;" class=image-circle>
+                    <img class="image" *ngIf="selectedRow?.user || selectedRow?.school"
+                        [src]="selectedRow?.user ? imageUrl + selectedRow?.user?.profile_img : imageUrl + selectedRow?.school?.profile_img"
+                        alt="">
+                    <img class="image" *ngIf="!selectedRow?.user?.profile_img && !selectedRow?.school?.profile_img"
+                    [src]="defaultPic" alt="">
+                </div>
+                &nbsp;
+                <div  style="cursor: pointer;" class="text-flex">
+                    <div (click)="userProfile(selectedRow?.user_id, selectedRow?.user_type)" class="top-text">
+                        {{selectedRow?.user ? selectedRow?.user.first_name + ' ' + selectedRow?.user.last_name :
+                        selectedRow?.school.school_name}}
+                    </div>
+                    <div (click)="userProfile(selectedRow?.user_id, selectedRow?.user_type)" style="cursor: pointer;" class="email-text">@{{ selectedRow?.user ? selectedRow?.user.username :
+                        selectedRow?.school.username}} &nbsp; <span
+                            class="time">{{getTime(selectedRow?.createdAt)}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-1 caption">
+            {{selectedRow?.text}}
+        </div>
+
+        <div class="mt-1">
+            <div *ngIf="selectedRow?.image != null && selectedRow?.video == null && selectedRow?.image.length == 1"
+                class="full-width feed-radius">
+                <img class="single-height feed-radius" [src]="postUrl + selectedRow?.image[0]" alt="new.png">
+            </div>
+
+            <div *ngIf="selectedRow?.image != null && selectedRow?.video == null && selectedRow?.image.length > 1"
+                class="full-width flex-btw wrap">
+                <div class="multiple-width" *ngFor="let image of selectedRow?.image">
+                    <img class="full-width feed-radius" [src]="postUrl + image" alt="new.png">
+                </div>
+            </div>
+
+            <div class="full-width feed-radius" *ngIf="selectedRow?.image == null && selectedRow?.video != null">
+                <video class="full-width feed-radius" controls>
+                    <source [src]="videoUrl + selectedRow.video" type="video/mp4">
+                    <source [src]="videoUrl + selectedRow.video" type="video/ogg">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <div class="mt-1 flex-buttons">
+            <button (click)="likePost(selectedRow)" mat-button
+                (click)="selectedRow.liked_post = !selectedRow.liked_post">
+                <div class="flex-btw">
+                    <span style="position: relative; top: 1px">
+                        <img *ngIf="!selectedRow?.liked_post" width="15" src="assets/images/like_active.svg" alt="">
+                        <img *ngIf="selectedRow?.liked_post" width="15" src="assets/images/like_solid.svg" alt="">
+                    </span> &nbsp;
+                    <span [ngClass]="{'active': selectedRow?.liked_post, 'faded': !selectedRow?.liked_post}">Like</span>
+                </div>
+            </button>
+
+            <button (click)="sharePost(selectedRow)" mat-button
+                (click)="selectedRow.shared_post = !selectedRow.shared_post">
+                <div class="flex-btw">
+                    <span style="position: relative; top: 1px">
+                        <img width="15" *ngIf="!selectedRow?.shared_post" src="assets/images/share_active.svg" alt="">
+                        <img *ngIf="selectedRow?.shared_post" width="15" src="assets/images/share_solid.svg" alt="">
+                    </span> &nbsp;
+                    <span
+                        [ngClass]="{'active': selectedRow?.shared_post, 'faded': !selectedRow?.shared_post}">Share</span>
+                </div>
+            </button>
+
+            <button mat-button>
+                <span style="position: relative; top: 1px">
+                    <img width="15" src="assets/images/comment_active.svg" alt="">
+                </span> &nbsp;
+                <span class="faded">Comment</span>
+            </button>
+
+            <!-- <button class="promote-button" mat-flat-button color="primary">
+                Promote Post
+            </button> -->
+        </div>
+
+        <div class="count-section">
+            <div class="mt-1 flex-btw full-width">
+                <app-button-counter class="quarter-width" [width]="15" [count]="selectedRow?.likes"
+                    [image]="'assets/images/like_active.svg'"></app-button-counter>
+
+                <app-button-counter class="quarter-width" [width]="15" [count]="selectedRow?.shares"
+                    [image]="'assets/images/share_active.svg'"></app-button-counter>
+
+                <app-button-counter class="quarter-width" [width]="15" [count]="selectedRow?.comments"
+                    [image]="'assets/images/comment_active.svg'"></app-button-counter>
+
+                <div class="quarter-width">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="!loading && !error && commentList.length > 0">
+        <div class="comments mt-1">
+            Comments
+        </div>
+
+        <div>
+            <div *ngFor="let comment of commentList" class="comment-section mb-1">
+                <div class="avatar-section">
+                    <div (click)="viewProfile(comment)" style="cursor: pointer;" class="profile-circle">
+                        <img class="profile-image"
+                            [src]="comment?.user ? imageUrl + comment?.user?.profile_img : imageUrl + comment?.school?.profile_img"
+                            alt="">
+                    </div>
+
+                    &nbsp;
+                    &nbsp;
+
+                    <div>
+                        <div (click)="viewProfile(comment)" style="cursor: pointer;"
+                        class="name">{{comment?.user ? comment?.user.first_name + ' ' + comment?.user.last_name :
+                            comment?.school.school_name}}</div>
+                        <div (click)="viewProfile(comment)" style="cursor: pointer;" class="username">
+                            @{{comment?.user ? comment?.user.username : comment?.school.username}} &nbsp; | &nbsp;
+                            {{getTime(comment?.updatedAt)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-1 message-section">
+                    {{comment?.text}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="error-height mt-3 flex-center" *ngIf="loading">
+        <app-app-loader></app-app-loader>
+    </div>
+
+    <div class="error-height mt-3 flex-center" *ngIf="!loading && error">
+        <app-error-state [message]="error" (retry)="getComments()"></app-error-state>
+    </div>
+
+    <div class="error-height mt-3 flex-center" *ngIf="!loading && !error && commentList.length == 0">
+        <app-empty-state [image]="'comment'" [width]="50" [message]="'No comments'"></app-empty-state>
+    </div>
+
+    <div class="full-width icon-fixed flex-end" *ngIf="!show">
+        <button mat-icon-button style="background-color: #0f4c8d; color: white;" (click)="show = !show; text = ''">
+            <mat-icon>comment</mat-icon>
+        </button>
+    </div>
+
+    <div class="input-section mt-1" *ngIf="show">
+        <textarea #myInput [(ngModel)]="text" name="text" class="text-section" cols="20" rows="5"></textarea>
+        <div class="flex-end icon-bottom">
+            <img *ngIf="!textLoading" (click)="commentPost()" style="cursor: pointer" src="assets/images/send_text.svg" />
+            <mat-progress-spinner *ngIf="textLoading" diameter="30" color="primary" mode="indeterminate">
+            </mat-progress-spinner>
+        </div>
+        <div class="flex-start icon-start" (click)="show = !show; text = ''">
+            <mat-icon style="cursor: pointer;" color="primary">close</mat-icon>
+        </div>
+    </div>
+</div>

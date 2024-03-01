@@ -1,0 +1,92 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/mixins.scss";
+
+.container{
+    height: 100vh;
+    background-color: #F1F5FA;
+
+    @include respond(tab-port){
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+}
+
+.side-nav{
+    width: 50%;
+    height: 100%;
+
+    @include respond(tab-port){
+        width: 50%;
+        height: 100%;
+        margin-top: 30px;
+    }
+}
+
+.login-section{
+    width: 50%;
+    height: 100%;
+
+    @include respond(big-phone){
+        width: 70%;
+    }
+
+    @include respond(mid-phone){
+        width: 90%;
+    }
+}
+
+
+.top-section{
+   height: 50%; 
+
+   @include respond(tab-port){
+        height: 100%;
+   }
+}
+
+.top-height{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bottom-section{
+    height: 50%;
+    position: relative;
+    width: 100%;
+
+    @include respond(tab-port){
+        display: none;
+    }
+}
+
+.header-section{
+    margin-top: 40px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 19px;
+    text-align: center;
+    color: $primary-color;
+}
+
+.sub-section{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: $primary-color;
+    width: 35%;
+    text-align: center;
+
+    @include respond(tab-port){
+        width: 100%
+    }
+}
+
+.image-positoning{
+    position: absolute !important;
+    bottom: 0 !important;
+    width: 80%;
+}

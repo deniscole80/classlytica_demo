@@ -1,0 +1,21 @@
+<div class="flex-page">
+    <div>
+        <img [width]="width ? width : 300" src="assets/images/error_image.svg" alt="error.svg">
+    </div>
+
+    <div class="mt-1 error-text">
+        Ooooops!
+    </div>
+    
+    <div class="mt-1 flex-center">
+        <div class="main-text">
+            {{message ? message : 'Error' }}
+        </div>
+        &nbsp;
+        <div>
+            <button mat-stroked-button class="button-border" color="primary" (click)="retryCall()">
+                Retry
+            </button>
+        </div>
+    </div>
+</div>

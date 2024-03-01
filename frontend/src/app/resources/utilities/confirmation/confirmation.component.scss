@@ -1,0 +1,55 @@
+@import '../../../../assets/scss/variables.scss';
+
+.top-modal{
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.prepay{
+    background-color: #4090ff0d;
+    padding: 5px 20px;
+    box-shadow: none;
+}
+
+.set-card{
+    padding: 10px 0;
+}
+
+.img-logo{
+    width: 50px;
+    height: 40px;
+    border-radius: 4px;
+    padding: 10px;
+    margin-right: 10px;
+
+    &.master{
+        background-color: $primary-color;
+    }
+
+    &.visa{
+        background-color: white;
+    }
+}
+
+.add-card{
+    &:hover{
+        background-color: #f2eaff;
+    }
+}
+
+.log{
+    border-radius: 50%;
+    border: 0.5px solid #777;
+    padding: 5px;
+}
+
+::ng-deep .custom-field-chip .mat-chip-list-wrapper .mat-chip {
+    font-size: 11px !important;
+    background-color: transparent !important;
+    cursor: pointer !important;
+
+    &.selected-chip{
+        background-color: $primary-color !important;
+        color: white !important;
+    }
+}

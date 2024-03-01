@@ -1,0 +1,78 @@
+@import "../../../../../assets/scss/variables.scss";
+@import "../../../../../assets/scss/mixins.scss";
+
+.container{
+    padding: 15px 40px;
+}
+
+.profile-section{
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+
+.profile-circle{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.profile-avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.name{
+    font-size: 13px;
+    color: $primary-color;
+    font-weight: 700;
+}
+
+.username{
+    font-size: 13px;
+    color: #9DB6D0;
+    font-weight: 700;
+}
+
+.details-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 35%;
+}
+
+.follow-text{
+    color: $primary-color;
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+
+.follow-bubble{
+   text-align: center;
+   border-radius: 10px;
+   background-color: #ffffff;
+   color: $primary-color;
+   font-size: 13px;
+   border: 2px solid $primary-color;
+   width: 20%;
+   padding: 5px 0;
+   cursor: pointer;
+}
+
+.page-height{
+    height: 60vh;
+}
+
+.follow-bubble-active{
+    text-align: center;
+    border-radius: 10px;
+    background-color: $primary-color;
+    font-size: 13px;
+    color: #ffffff;
+    width: 20%;
+    padding: 5px 0;
+    cursor: pointer;
+}

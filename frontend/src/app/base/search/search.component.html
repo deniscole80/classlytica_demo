@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="header mt-2">Search</div>
+    <div *ngIf="activeTab == 'Users'" class="mt-2 full-width">
+        <input matInput [(ngModel)]="searchText" (keyup)="searchUser()"
+        placeholder="First Name, Last Name, Username, School Name" class="comment-input" />
+    </div>
+
+    <div *ngIf="activeTab == 'Schools'" class="mt-2 full-width">
+        <input matInput [(ngModel)]="searchText" (keyup)="searchUser()"
+        placeholder="First Name, Last Name, Username, School Name" class="comment-input" />
+    </div>
+
+    <div class="mt-2 flex-tabs">
+        <div class="inactive-tab" (click)="switchTab(tab)" [ngClass]="{'active-tab': tab.isactive}" *ngFor="let tab of searchTabs">
+            {{tab.name}}
+        </div>
+    </div>
+
+    <div *ngIf="activeTab == 'Users'" class="mt-1 overflow custom-scroll-bar" [style.height.px]="innerHeight">
+        <div *ngIf="!searchLoading && !searchError && users.length > 0">
+            <div class="search-section" *ngFor="let user of users">
+                <div class="left-section">
+                    <div (click)="userProfile(user)" class="profile-section">
+                        <img class="profile-avatar" [src]="user?.profile_img ? imgUrl + user?.profile_img : '/assets/images/nomad.svg'">
+                    </div>
+    
+                    &nbsp;
+                    &nbsp;
+    
+                    <div>
+                        <div (click)="userProfile(user)" class="name">{{user.first_name + ' ' + user.last_name}}</div>
+                        <div (click)="userProfile(user)" class="username">@{{user.username}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-center search-empty" *ngIf="searchLoading">
+            <app-app-loader></app-app-loader>
+        </div>
+
+        <div class="flex-center search-empty" *ngIf="!searchLoading && !searchError && users.length <= 0">
+            <app-empty-state [width]="100" [message]="'No results found'"></app-empty-state>
+        </div>
+
+        <div class="flex-center search-empty" *ngIf="!searchLoading && searchError">
+            <app-error-state [width]="100" [message]="searchError"></app-error-state>
+        </div>
+    </div>
+
+    <div *ngIf="activeTab == 'Schools'" class="mt-1 overflow custom-scroll-bar" [style.height.px]="innerHeight">
+        <div *ngIf="!searchLoading && !searchError && schools.length > 0">
+            <div class="search-section" *ngFor="let user of schools">
+                <div class="left-section">
+                    <div (click)="userProfile(user)" class="profile-section">
+                        <img class="profile-avatar" [src]="user?.profile_img ? imgUrl + user?.profile_img : '/assets/images/nomad.svg'">
+                    </div>
+    
+                    &nbsp;
+                    &nbsp;
+    
+                    <div>
+                        <div (click)="userProfile(user)" class="name">{{user.school_name}}</div>
+                        <div (click)="userProfile(user)" class="username">@{{user.username}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-center search-empty" *ngIf="searchLoading">
+            <app-app-loader></app-app-loader>
+        </div>
+        <div class="flex-center search-empty" *ngIf="!searchLoading && !searchError && schools.length <= 0">
+            <app-empty-state [width]="100" [message]="'No results found'"></app-empty-state>
+        </div>
+
+        <div class="flex-center search-empty" *ngIf="!searchLoading && searchError">
+            <app-error-state [width]="100" [message]="searchError"></app-error-state>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/mixins.scss";
+
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F1F5FA;
+}
+
+.main-text{
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    line-height: 27px;
+    color: $primary-color;
+    width: 40%;
+}
+
+.mail{
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    background-color: #91E55E;
+    border-radius: 50%;
+}
+
+.login-text{
+    font-size: 15px;
+    color: #386AA0;
+}

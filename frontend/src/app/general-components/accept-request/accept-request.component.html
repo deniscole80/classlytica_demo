@@ -1,0 +1,15 @@
+<div class="wrap flex-center">
+    <div class="warn">
+        <img src="assets/images/warning.svg" style="width: 100%;" alt="warning">
+    </div>
+
+    <div class="text">
+        You are about to <span style="font-style: italic; font-weight: 500;">{{data.action}}</span> employment request from <span class="bold-600">{{data.name}}</span>
+    </div>
+
+    <div class="flex-center mt-2">
+        <button mat-flat-button class="action-but" color="primary" (click)="accept()">{{data.action | titlecase}}</button>
+        &nbsp; 
+        <button mat-flat-button class="action-but" color="primary" (click)="close()">Close</button>
+    </div>
+</div>

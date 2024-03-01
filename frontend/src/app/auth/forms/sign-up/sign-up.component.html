@@ -1,0 +1,133 @@
+<div class="login-items">
+    <form [formGroup]="signupForm" class="form-section">
+        <div class="mt-2 full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    First Name
+                    &nbsp;
+                </span>
+                <input formControlName="firstname" type="text" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Last Name
+                    &nbsp;
+                </span>
+                <input formControlName="lastname" type="text" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Other Names
+                    &nbsp;
+                </span>
+                <input formControlName="othernames" type="text" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Username
+                    &nbsp;
+                </span>
+                <input formControlName="username" type="text" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Gender
+                    &nbsp;
+                </span>
+                <mat-radio-group formControlName="gender" color="primary">
+                    <mat-radio-button labelPosition="before" value="male">Male</mat-radio-button>
+                    <mat-radio-button labelPosition="before" value="female">Female</mat-radio-button>
+                </mat-radio-group>
+                <input type="text" hidden matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Country
+                    &nbsp;
+                </span>
+                <mat-select formControlName="country" placeholder="Select Country">
+                    <mat-option *ngFor="let country of countries" [value]="country.name">
+                        {{country.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Individual Type
+                    &nbsp;
+                </span>
+                <mat-select formControlName="individual" placeholder="Select type">
+                    <mat-option value="parent">Parent</mat-option>
+                    <mat-option value="student">Student</mat-option>
+                    <mat-option value="teacher">Teacher</mat-option>
+                    <mat-option value="other">Other</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Email
+                    &nbsp;
+                </span>
+                <input formControlName="email" type="email" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Phone
+                    &nbsp;
+                </span>
+                <input formControlName="phonenumber" type="text" matInput>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-checkbox #attest color="primary"></mat-checkbox> &nbsp;
+            <span class="attest">By Signing up, you agree to our <u>Privacy Policy</u> and <u>Terms and Conditions</u></span>
+        </div>
+
+        <div *ngIf="errorMsg" class="errormsg">{{errorMsg}}</div>
+
+        <div class="mt-1 full-width">
+            <button [disabled]="signupForm.invalid || loading || !attest.checked" (click)="addAccount()"
+             class="full-width general-btn-style" color="primary" mat-flat-button>
+                <span *ngIf="loading" class="spinner-positioning">
+                    <mat-progress-spinner
+                    diameter="30"
+                    color="primary"
+                    mode="indeterminate">
+                    </mat-progress-spinner>
+                </span>
+                <span *ngIf="!loading">Create account</span>
+            </button>
+        </div>
+
+        <div class="mt-3">
+            <span class="forgot-password">Already have an account?</span> &nbsp;
+            <span class="forgot-password link-highlight" routerLink="/"><b>Login</b></span>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,27 @@
+<div class="wrapper">
+    <mat-tab-group class="custom-tab">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span><img src="assets/images/create-role.svg"></span>
+                &nbsp; &nbsp;
+                <span>Create Roles</span>
+            </ng-template>
+
+            <ng-template matTabContent>
+                <app-create-roles></app-create-roles>
+            </ng-template>
+        </mat-tab>
+        
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span><img src="assets/images/assign-role.svg"></span>
+                &nbsp; &nbsp;
+                <span>Available Roles</span>
+            </ng-template>
+
+            <ng-template matTabContent>
+                <app-assign-roles></app-assign-roles>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>

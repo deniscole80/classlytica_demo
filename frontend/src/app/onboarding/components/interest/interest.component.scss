@@ -1,0 +1,77 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/mixins.scss";
+
+.main-text{
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    line-height: 27px;
+    color: $primary-color;
+}
+
+.item-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    width: 80%;
+    margin: 0 auto;
+
+    @include respond (phone){
+        width: 95%;       
+    }
+}
+
+.item{
+    background: #0F4C8D;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 23%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include respond (phone){
+        width: fit-content;
+        
+    }
+}
+
+.active-item{
+    background: #91E55E;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: $primary-color;
+    margin-bottom: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.general-btn-style{
+    border-radius: 10px;
+    padding: 4px 0;
+    border-radius: 10px;
+    padding: 4px 0;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100px;
+}
+
+.button-spacing{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-positioning{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0;
+}

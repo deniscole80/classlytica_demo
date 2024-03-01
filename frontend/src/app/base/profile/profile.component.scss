@@ -1,0 +1,116 @@
+.top-container{
+    width: 100%;
+    height: 30%;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.full-height{
+    height: 100%;
+}
+
+.grey-camera{
+    cursor: pointer;
+}
+
+.image-section{
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.image-circle{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #DBDBDB;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.blue-camera{
+    cursor: pointer;
+    // z-index: 999999;
+}
+
+.profile-details{
+    padding: 0;
+}
+
+.dialog{
+    display: none;
+    position: absolute;
+    bottom: 0;
+    padding: 24px;
+    border-radius: 4px;
+    overflow: auto;
+    outline: 0;
+    width: 70%;
+    height: 30%;
+    margin: 0 auto;
+    z-index: 999;
+    left: 15%;
+
+    box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+    background: white;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.slide-up{
+    display: block;
+    animation: slide 1.5s;
+}
+
+.slide-down{
+    animation: slide-down 2s;
+}
+
+@keyframes slide {
+    0%{
+        margin-bottom: -300px;
+    }
+    100%{
+        margin-bottom: 0px;
+    }
+}
+
+@keyframes slide-down {
+    0%{
+        margin-bottom: 0px;
+    }
+    100%{
+        margin-bottom: -300px;
+        display: none;
+    }
+}
+
+::ng-deep .mat-drawer-content {
+    position: unset;
+}
+// ::ng-deep.cdk-global-overlay-wrapper {
+//     animation: slide 2s ease-in-out;
+// }
+
+
+// // .custom-popup{
+// //     animation: slide 2s;
+// // }
+
+// @keyframes slide {
+//     0% {
+//         top: 230px;
+//     }
+//     100% {
+//         top: 0px;
+//     }
+// }

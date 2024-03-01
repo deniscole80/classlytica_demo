@@ -1,0 +1,90 @@
+@import "../../../../../assets/scss/variables.scss";
+@import "../../../../../assets/scss/mixins.scss";
+
+.container{
+    padding: 0 30px;
+    overflow-y: auto;
+    height: 66vh;
+}
+
+.name-text{
+    color: $primary-color;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.username-text{
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 18px;
+    color: #9DB6D0;
+    margin-top: 5px;
+}
+
+.header{
+    font-size: 14px;
+    color: $primary-color;
+    font-weight: 700;
+}
+
+.item-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+
+    @include respond (phone){
+        width: 95%;       
+    }
+}
+
+.item{
+    background: #0F4C8D;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 23%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include respond (phone){
+        width: fit-content;
+        
+    }
+}
+
+.active-item{
+    background: #91E55E;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: $primary-color;
+    margin-bottom: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.text{
+    width: 100%;
+    background-color: #E7EDF4;
+    border-radius: 10px;
+    border: none;
+    padding: 25px 50px 25px 10px;
+    resize: none;
+    height: 100%;
+    color: $primary-color;
+
+    &:focus-visible{
+        outline: none;
+    }
+}
+
+.submit-section{
+    width: 60%;
+    border-radius: 10px;
+    padding: 5px 0;
+}

@@ -1,0 +1,30 @@
+@import "../../../assets/scss/variables.scss";
+@import "../../../assets/scss/mixins.scss";
+
+.flex-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.error-text{
+    font-size: 15px;
+    font-weight: 700;
+    color: $primary-color;
+    text-align: center;
+}
+
+.main-text{
+    font-size: 13px;
+    color: $primary-color;
+}
+
+.button-border{
+    border-radius: 10px;
+    border: 1px solid $primary-color;
+    font-size: 12px;
+    cursor: pointer;
+}

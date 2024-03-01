@@ -1,0 +1,47 @@
+<div class="flex-end">
+    <img style="cursor: pointer;" src="/assets/images/cancel.svg" width="20" (click)="cancel()" alt="cancel.svg">
+</div>
+
+<div class="mt-2 section-wrapper">
+    <div class="arrangement one flex-btw">
+        <div class="profile-circle">
+            <img *ngIf="selectedImage != ''" class="upload" [src]="selectedImage" alt="image">
+        </div>
+    
+        <div class="picker-text lap">Image Picker</div>
+
+        <div class="lap">
+            <img src="assets/images/triangle.svg" width="10" alt="triangle">
+        </div>
+
+        <div class="rectangle">
+            <div *ngFor="let image of avatars" class="avatar" (click)="selectAvatar(image.value)">
+                <img [src]="image.image" width="100%" alt="avatar">
+            </div>
+        </div>
+
+        <div class="rotate mob">
+            <img src="assets/images/triangle.svg" width="10" alt="triangle">
+        </div>
+
+        <div class="picker-text mob">Image Picker</div>
+    </div>
+
+    <div class="picker-text">- OR -</div>
+
+    <div class="picker-text mob">Upload Profile Picture</div>
+
+    <div class="flex-btw arrangement">
+        <div class="profile-circle">
+            <img *ngIf="fileSystemImage" class="upload" [src]="fileSystemImage" 
+            accept=".png,.jpg,.jpeg" alt="image">
+        </div>
+        <div class="picker-text lap">Upload Profile Picture</div>
+        <div class="file" (click)="upload.click()">
+            <input type="file" hidden #upload accept="image/*" (change)="setImage($event)">
+            <img src="assets/images/filepicker.svg" width="80"  alt="filepicker">
+            <div class="file-text">Not more than 500kb</div>
+        </div>
+    </div>
+
+</div>

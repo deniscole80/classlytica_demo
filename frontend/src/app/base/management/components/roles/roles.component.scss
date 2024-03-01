@@ -1,0 +1,50 @@
+@import "../../../../../assets/scss/variables.scss";
+@import "../../../../../assets/scss/variables.scss";
+
+.wrapper{
+    padding: 40px 20px 0;
+    height: 100%;
+    overflow: auto;
+}
+
+::ng-deep .custom-tab{
+    .mat-tab-nav-bar, .mat-tab-header {
+        border-bottom: none !important; 
+    }
+
+    .mat-tab-header{
+        position: sticky;
+        top: -42px;
+        background: white;
+        z-index: 99;
+    }
+
+    .mat-tab-labels {
+        justify-content: center;
+        background-color: #fafafa;
+    }
+
+    .mat-tab-label {
+        height: 48px;
+        padding: 0 24px;
+        cursor: pointer;
+        box-sizing: border-box;
+        opacity: .6;
+        min-width: 160px;
+        text-align: center;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        white-space: nowrap;
+        position: relative;
+        color: $primary-color;
+    }
+
+    &.mat-tab-group{
+        height: 100% !important;
+    }
+
+    .mat-tab-body-wrapper{
+        height: 100%;
+    }
+}

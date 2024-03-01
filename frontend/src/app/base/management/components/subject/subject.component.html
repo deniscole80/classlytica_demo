@@ -1,0 +1,71 @@
+<div class="container mt-5">
+    <div class="mt-2 top-section header">Create Subjects</div>
+    <form [formGroup]="classForm" class="mt-6 top-section flex-el">
+        <div class="class-width">
+            <mat-form-field class="full-width dropdown-form signup-form" appearance="fill" color="#E7EDF4">
+                <input class="dropdown-form" formControlName="subject" placeholder="Subject" type="text" matInput>
+            </mat-form-field>
+        </div>
+
+        &nbsp;
+        &nbsp;
+
+        <div class="main-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Alias
+                    &nbsp;
+                </span>
+                <input formControlName="alias" type="text" matInput>
+            </mat-form-field>
+        </div>
+
+        &nbsp;
+        &nbsp;
+
+        <div class="button-width">
+            <button (click)="addClass()" [disabled]="loading || classForm.invalid" class="button-style" mat-flat-button color="primary">
+                <span *ngIf="!loading">Create</span>
+                <span *ngIf="loading" class="spinner-positioning">
+                    <mat-progress-spinner
+                    diameter="20"
+                    color="primary"
+                    mode="indeterminate">
+                    </mat-progress-spinner>
+                </span>
+            </button>
+        </div>
+    </form>
+
+    <div class="flex-center" *ngIf="tableLoading">
+        <app-app-loader></app-app-loader>
+    </div>
+
+    <div class="flex-center" *ngIf="!tableLoading && !tableError && studentList.length <= 0">
+        <app-empty-state message="No subjects yet"></app-empty-state>
+    </div>
+
+    <div class="flex-center" *ngIf="!tableLoading && tableError">
+        <app-error-state [message]="message" (retry)="getClassroom()"></app-error-state>
+    </div>
+
+    <div *ngIf="!tableLoading && !tableError && studentList.length > 0" class="custom-scroll-bar" style="height: 65vh;">
+        <table class="table-section mt-4">
+            <thead>
+                <th>Subject</th>
+                <th>Alias</th>
+                <!-- <th></th> -->
+            </thead>
+    
+            <tbody>
+                <tr *ngFor="let student of studentList">
+                    <td>{{student?.subject_name}}</td>
+                    <td>{{student?.alias}}</td>
+                    <!-- <td>
+                        <button mat-stroked-button color="primary" class="view-button">View all Students</button>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="custom-scroll-bar" [style.height.px]="innerHeight">
+    <div [ngClass]="{'white-container': i % 2 == 1, 'smoke-container': i % 2 == 0}"
+    *ngFor="let kid of kidData; let i = index">
+        <div class="flex-el">
+            <div class="profile-circle">
+                <img class="avatar" [src]="kid.img ? imgUrl + kid.img : '/assets/images/nomad.svg'">
+            </div>
+
+            &nbsp;
+            &nbsp;
+
+            <div>
+                <div class="name">{{kid?.first_name + ' ' + kid?.last_name}}</div>
+            </div>
+        </div>
+        <div (click)="viewKid(kid)" class="view-profile">
+            View Profile
+        </div>
+    </div>
+</div>

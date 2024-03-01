@@ -1,0 +1,111 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/mixins.scss";
+
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F1F5FA;
+}
+
+.main-text{
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    line-height: 27px;
+    color: $primary-color;
+    width: 40%;
+
+    @include respond(mid-phone){
+        width: 80%;
+    }
+}
+
+.form-title{
+    color: #386AA0;
+    font-size: 10px;
+    font-weight: 400;
+
+    @include respond(tab-land){
+        font-size: 8px;
+    }
+
+    @include respond(galaxy-fold){
+        font-size: 8px;
+    }
+}
+
+.section-width{
+    width: 30%;
+
+    @include respond(tab-port){
+        width: 50%;
+    }
+
+    @include respond(phone){
+        width: 60%;
+    }
+
+    @include respond(mid-phone){
+        width: 80%;
+    }
+}
+
+.general-btn-style{
+    border-radius: 10px;
+    padding: 4px 0;
+    border-radius: 10px;
+    padding: 4px 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+::ng-deep .signup-form{
+    &.mat-form-field-appearance-fill .mat-form-field-flex {
+        border-radius: 10px !important;
+        padding: 4px 15px !important;
+        background-color: #E7EDF4;
+    }
+
+    .mat-form-field-underline {
+        width: 0 !important;
+    }
+    
+    &.mat-form-field-appearance-fill .mat-form-field-infix {
+        padding: 0.45em 0.25em 0.75em 0.45em !important;
+        font-size: 12px;
+        color: $primary-color !important;
+    }
+
+    .mat-form-field-prefix, .mat-form-field-suffix {
+        white-space: nowrap;
+        flex: none;
+        position: relative;
+        width: 30%;
+        border-right: 1px solid #9DB6D0;
+        text-align: end;
+        padding: 5px 0;
+
+        @include respond(smaller-phone){
+            width: 40%;
+        }
+    }
+
+    .mat-form-field-suffix {
+        white-space: nowrap;
+        flex: none;
+        position: relative;
+        width: 10%;
+        border: none;
+    }
+}
+
+.spinner-positioning{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0;
+}

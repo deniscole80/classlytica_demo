@@ -1,0 +1,162 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/mixins.scss";
+
+.flex-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-section{
+    margin: 0 auto;
+
+    @include respond (big-phone){
+        flex-direction: column;
+    }
+}
+
+.main-text{
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    line-height: 27px;
+    color: $primary-color;
+    text-align: left;
+    width: 65%;
+
+    @include respond (big-phone){
+        text-align: center;
+    }
+}
+
+.profile{
+    width: 150px;
+    height: 150px;
+    box-shadow: 2px 2px 2px 3px rgb(0 0 0 / 10%);
+    border-radius: 50%;
+}
+
+.profile-pic{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.scroll-height{
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 70%;
+
+    @include respond (tab-land){
+        width: 85%;
+    }
+}
+
+.section-width{
+    width: 45%;
+
+    @include respond (big-phone){
+        width: 48%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.profile-image{
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.image-avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.text{
+    width: 65%;
+    padding-left: 15px;
+
+    @include respond (big-phone){
+        width: 90%;
+        padding-left: 0;
+    }
+}
+
+.name{
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    color: #0F4C8D;
+}
+
+.view-profile{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #0F4C8D;
+}
+
+.follow{
+    border: 2px solid $primary-color;
+    border-radius: 10px;
+    padding: 3px 20px;
+    color: $primary-color;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.following{
+    background-color: $primary-color;
+    font-weight: 400;
+    font-size: 12px;
+    color: #FFFFFF;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 4px 20px;
+}
+
+.general-btn-style{
+    border-radius: 10px;
+    padding: 4px 0;
+    border-radius: 10px;
+    padding: 4px 0;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100px;
+}
+
+.button-spacing{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-positioning{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0;
+}
+
+.uppercase-text{
+    text-transform: uppercase;
+}

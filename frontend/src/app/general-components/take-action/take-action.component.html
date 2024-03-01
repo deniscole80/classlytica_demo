@@ -1,0 +1,25 @@
+<div class="wrap flex-center">
+    <div class="warn mt-2">
+        <img src="assets/images/warning.svg" style="width: 100%;" alt="warning">
+    </div>
+
+    <div class="text" *ngIf="!data.message">
+        Are you sure you want to <span>{{data.action == 'cancelled' ? 'cancel' : data.action }}</span> this request from <span>{{data.name}}</span>
+    </div>
+
+    <div class="text" *ngIf="data.message">
+        The request from <span>{{data.name}}</span> was Declined!
+    </div>
+
+    <div *ngIf="data.message">
+        <div class="title">Reason:</div>
+
+        <div class="text-box">{{data.message}}</div>
+    </div>
+
+    <div class="flex-center mt-2">
+        <button *ngIf="!data.message" mat-flat-button class="action-but" color="primary" (click)="action()">Accept</button>
+        &nbsp; 
+        <button mat-flat-button class="action-but" color="primary" (click)="close()">Close</button>
+    </div>
+</div>

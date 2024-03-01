@@ -1,0 +1,167 @@
+@import "../../../../../assets/scss/variables.scss";
+@import "../../../../../assets/scss/mixins.scss";
+
+.login-items{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+}
+
+.form-section{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @include respond(tab-port){
+        width: 80%;
+    }
+
+    @include respond(smaller-phone){
+        width: 95%;
+    }
+}
+
+.text{
+    width: 100%;
+    background-color: #E7EDF4;
+    border-radius: 10px;
+    border: none;
+    padding: 25px 50px 25px 10px;
+    resize: none;
+    height: 100%;
+    color: $primary-color;
+
+    &:focus-visible{
+        outline: none;
+    }
+}
+
+.header{
+    font-size: 14px;
+    color: $primary-color;
+    font-weight: 700;
+}
+
+.form-title{
+    color: #386AA0;
+    font-size: 12px;
+    font-weight: 400;
+
+    @include respond(tab-land){
+        font-size: 9px;
+    }
+}
+
+.general-btn-style{
+    border-radius: 10px;
+    padding: 4px 0;
+    border-radius: 10px;
+    padding: 2px 0;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.forgot-password{
+    color: $primary-color;
+    font-size: 11px;
+}
+
+.link-highlight{
+    cursor: pointer;
+
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+
+::ng-deep .signup-form{
+    &.mat-form-field-appearance-fill .mat-form-field-flex {
+        border-radius: 10px !important;
+        padding: 4px 15px !important;
+        background-color: #E7EDF4;
+    }
+
+    .mat-form-field-underline {
+        width: 0 !important;
+    }
+    
+    &.mat-form-field-appearance-fill .mat-form-field-infix {
+        padding: 0.45em 0.25em 0.75em 0.45em !important;
+        font-size: 12px;
+        color: $primary-color !important;
+    }
+
+    .mat-form-field-prefix, .mat-form-field-suffix {
+        white-space: nowrap;
+        flex: none;
+        position: relative;
+        width: 30%;
+        border-right: 1px solid #9DB6D0;
+        text-align: end;
+        padding: 5px 0;
+    }
+
+    .mat-form-field-suffix {
+        white-space: nowrap;
+        flex: none;
+        position: relative;
+        width: 10%;
+        border: none;
+    }
+}
+
+//Mat select dropdown
+::ng-deep .mat-select-placeholder {
+    color: $primary-color;
+    padding: 0 10px;
+    font-size: 10px;
+}
+
+::ng-deep .mat-select-arrow-wrapper {
+    height: 0px !important;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+}
+
+::ng-deep .mat-select-arrow {
+    color: $primary-color !important;
+}
+
+::ng-deep .mat-select-panel {
+    background: #E7EDF4;
+}
+
+::ng-deep .mat-option {
+    color: #386AA0;
+}
+
+::ng-deep .mat-select-value {
+    color: $primary-color;
+    padding: 0 10px;
+    font-size: 10px;
+}
+
+::ng-deep .mat-option.mat-active {
+    background: rgba(0, 0, 0, 0.04);
+    color: #386AA0;
+}
+
+::ng-deep .mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
+    font-size: 10px !important;
+    line-height: 3em;
+    height: 3em;
+}
+
+.spinner-positioning{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0;
+}

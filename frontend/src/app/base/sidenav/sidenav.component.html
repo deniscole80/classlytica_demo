@@ -1,0 +1,125 @@
+<mat-sidenav-container *ngIf="!loading && !error" class="container-height">
+    <mat-sidenav opened="true" mode="side" class="left-nav">
+       <div class="custom-scroll-bar" style="height: 100%;">
+        <div *ngIf="showText" class="profile">
+
+            <img src="assets/images/app_logo_white.png" width="140" alt="logo">
+
+            <div *ngIf="profileImage" class="mt-2 pic-wrapper">
+                <img class="avatar-image" [src]="imageUrl + profileImage">
+            </div> 
+
+            <div *ngIf="!profileImage" class="mt-2 pic-wrapper">
+                <img class="avatar-image" src="/assets/images/nomad.svg">
+            </div> 
+
+            <div class="name">{{lastName ? firstName + ' ' + lastName : firstName}}</div>
+            <div *ngIf="percentage < 100" class="mt-3 progress-width">
+                <app-custom-progress-bar [isSolid]="false" [percentage]="percentage"></app-custom-progress-bar>
+                <div class="mt-1 complete-link flex-end" (click)="routeUser()">
+                    Complete profile now.
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!showText" class="profile-cover">
+            <img src="assets/images/app_logo_white.png" width="150" alt="logo">
+        </div>
+
+        <div class="side-nav">
+            <div *ngFor="let item of sideNavList" [ngClass]="{'hide': noSchool && item.child && userType != 1}"
+            (click)="item.name == 'Logout' ? exit() : ''; item.child ? isChild = !isChild: ''; $event.stopPropagation();">
+                <div class="flex-el side-nav-item" [routerLink]="item.route" routerLinkActive="nav-item-active">
+                    <div class="inactive" (click)="openChild(item)">
+                        <img [src]="item.icon" alt="icon.svg">
+                        &nbsp;
+                        &nbsp;
+                    </div>
+    
+                    <div class="active" (click)="openChild(item)">
+                        <img [src]="item.iconActive" alt="iconactive.svg">
+                        &nbsp;
+                        &nbsp;
+                    </div>
+    
+                    <div (click)="openChild(item)">
+                        {{item.name}}
+                    </div>
+    
+                    <div *ngIf="item.child" (click)="isChild = !isChild; $event.stopPropagation()" class="flex-end" style="width: 30%;">
+                        <mat-icon>expand_more</mat-icon>
+                    </div>
+                </div>
+
+                <div class="menu-child" *ngIf="isChild" (click)="$event.stopPropagation()">
+                    <button mat-menu-item *ngFor="let child of item.child" class="custom-mat-menu" [routerLink]="child.route" 
+                    [ngClass]="{'hide': child.display}" routerLinkActive="child-active">
+                        <span><img [src]="child.icon" alt=""></span>
+                        &nbsp;
+                        <span>{{child.name}}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+       </div>
+    </mat-sidenav>
+    <mat-sidenav opened="true"  mode="side" class="right-nav" position="end" *ngIf="!closeLeft">
+        <div class="suggestion-header">
+            <div class="mt-6 top-text">
+                People you would like to follow
+            </div>
+
+            <div class="mt-2 flex-center" *ngIf="suggestionLoading" [style.height.px]="innerHeight">
+                <app-app-loader></app-app-loader>
+            </div>
+
+            <div class="mt-2 flex-center" *ngIf="error && !suggestionLoading">
+                <app-error-state [width]="300" [message]="this.message" (retry)="getSuggestions()"></app-error-state>
+            </div>
+
+            <div class="mt-2 flex-center" 
+            *ngIf="!error && suggestions.length == 0 && !suggestionLoading">
+                <app-empty-state [width]="200" [message]="'No Suggestions'" ></app-empty-state>
+            </div>
+
+            <div class="suggestions mt-2" [style.height.px]="innerHeight" 
+            *ngIf="suggestions.length > 0 && !error && !suggestionLoading">
+                <div>
+                    <div *ngFor="let suggestion of suggestions" class="mb-2 section-width flex-btw">
+                        <div (click)="userProfile(suggestion)" class="profile-image">
+                            <img class="image-avatar" *ngIf="suggestion.profile_img != null" 
+                            [src]="imageUrl + suggestion?.profile_img" alt="">
+                            <img class="image-avatar" *ngIf="suggestion.profile_img == null" 
+                            src="/assets/images/nomad.svg" alt="nosuggestion.png">
+                        </div>
+                        <div class="text">
+                            <div (click)="userProfile(suggestion)" class="avatar-name">
+                                {{suggestion?.first_name ? suggestion?.first_name + ' ' + suggestion?.last_name : suggestion?.school_name}}
+                            </div>
+                            <div (click)="userProfile(suggestion)" class="view-profile">
+                                View Profile
+                            </div>
+                            <div [ngClass]="{'follow': suggestion, 'following': suggestion?.follow == 1}" 
+                            (click)="followToggle(suggestion)">
+                                {{suggestion.follow == 1 ? 'following' : 'follow'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-sidenav>
+    <section class="main-nav">
+        <router-outlet></router-outlet>
+    </section>
+</mat-sidenav-container>
+
+<div *ngIf="loading" class="loader-positioning">
+    <app-main-loader></app-main-loader>
+</div>
+
+<div *ngIf="!loading && error" class="error-positioning">
+    <app-error-state (retry)="getProgress()" [message]="message"></app-error-state>
+</div>
+
+  

@@ -1,0 +1,27 @@
+<div class="wrapper custom-scroll-bar">
+    <mat-tab-group class="custom-tab">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span><img src="assets/images/add.svg"></span>
+                &nbsp; &nbsp;
+                <span>Register</span>
+            </ng-template>
+
+            <ng-template matTabContent>
+                <app-parent-register></app-parent-register>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span><img src="assets/images/St.svg"></span>
+                &nbsp; &nbsp;
+                <span>Parent List</span>
+            </ng-template>
+
+            <ng-template matTabContent>
+                <app-parent-list></app-parent-list>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>

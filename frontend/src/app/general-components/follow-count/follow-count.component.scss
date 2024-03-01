@@ -1,0 +1,27 @@
+@import "../../../assets/scss/variables.scss";
+@import "../../../assets/scss/mixins.scss";
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text{
+    color: $primary-color;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.dot{
+    border-radius: 50%;
+    background-color: #F93434;
+    color: #FFFFFF;
+    width: 25px;
+    height: 25px;
+    font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

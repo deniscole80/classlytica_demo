@@ -1,0 +1,137 @@
+@import '../../../../../../assets/scss/variables.scss';
+
+.container{
+    padding: 20px;
+}
+
+.search{
+    width: 40%;
+}
+
+.search-width{
+    width: 100%;
+}
+
+::ng-deep .sort-form{
+    input, select{
+        color: $primary-color !important;
+        font-size: 12px !important;
+    }
+    
+    &.mat-form-field-appearance-fill .mat-form-field-wrapper {
+        padding-bottom: 0 !important;
+    }
+
+    &.mat-form-field-appearance-fill .mat-form-field-flex {
+        padding: 0 10px !important;
+        background: #DEEBFC !important;
+        border-radius: 10px;
+    }
+
+    &.mat-form-field-appearance-fill .mat-form-field-underline {
+        display: none !important;
+    }
+
+    &.mat-form-field-appearance-fill .mat-form-field-infix {
+        padding: 10px 0 !important;
+    }
+
+    .mat-select-value {
+        color: $primary-color;
+        font-size: 12px;
+    }
+
+    .mat-select-arrow-wrapper {
+        display: none !important;
+    }
+
+    .mat-select-arrow {
+        display: none !important;
+    }
+
+    .mat-select-placeholder {
+        transition: color 400ms 133.3333333333ms cubic-bezier(0.25, 0.8, 0.25, 1);
+        color: $primary-color;
+    }
+}
+
+.header{
+    padding: 4px 30px;
+    background-color: #E7EDF4;
+    color: $primary-color;
+    font-size: 14px;
+    font-weight: 700;
+    width: 80%;
+}
+
+.main-section{
+    padding: 4px 30px;
+}
+
+.flex-width{
+    width: 50%;
+}
+
+.check-item{
+    font-size: 14px;
+    color: $primary-color;
+    font-weight: 500;
+}
+
+.drop{
+    padding: 2px;
+    background-color: #E7EDF4;
+    position: relative;
+}
+
+.button-section{
+    width: 80%;
+}
+
+.menu{
+    overflow: auto;
+    z-index: 99;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    position: absolute;
+    width: 50%;
+    &.menu-child-active{
+        animation: reveal 1s linear;
+    }
+}
+
+.custom-mat-menu{
+    display: none;
+    
+    &.mat-menu-item {
+        border: 1px solid #9DB6D0;
+        background-color: #FFFFFF;
+        display: flex;
+        padding: 5px 20px;
+        justify-content: space-between;
+        text-align: center;
+        border-radius: 0;
+        margin: 0 auto;
+        border-width: 1px;
+        color: #0F4C8D !important;
+        cursor: pointer;
+    }
+
+    &.child-active{
+        background-color: #E7EDF4;
+        display: block !important;
+    }
+}
+
+.dd-text{
+    color: $primary-color;
+}
+
+
+.spinner-positioning{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0;
+}

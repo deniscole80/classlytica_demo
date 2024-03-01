@@ -1,0 +1,159 @@
+@import "../../../../../assets/scss/variables.scss";
+@import "../../../../../assets/scss/mixins.scss";
+
+.container{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.form-title{
+    color: #386AA0;
+    font-size: 12px;
+    font-weight: 400;
+
+    @include respond(tab-land){
+        font-size: 9px;
+    }
+}
+
+.header{
+    color: $primary-color;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.class-width{
+    width: 20%;
+}
+
+::ng-deep .signup-form{
+    &.mat-form-field-appearance-fill .mat-form-field-flex {
+        border-radius: 10px !important;
+        padding: 4px 15px !important;
+        background-color: #E7EDF4;
+    }
+
+    .mat-form-field-underline {
+        width: 0 !important;
+    }
+    
+    &.mat-form-field-appearance-fill .mat-form-field-infix {
+        padding: 0.45em 0.25em 0.75em 0.45em !important;
+        font-size: 12px;
+        color: $primary-color !important;
+    }
+
+    .mat-form-field-prefix, .mat-form-field-suffix {
+        white-space: nowrap;
+        flex: none;
+        position: relative;
+        width: 30%;
+        border-right: 1px solid #9DB6D0;
+        text-align: end;
+        padding: 5px 0;
+    }
+
+    .mat-form-field-suffix {
+        white-space: nowrap;
+        flex: none;
+        position: relative;
+        width: 10%;
+        border: none;
+    }
+}
+
+.table-section{
+    border-collapse: collapse;
+    margin: 0 auto;
+    width: 90%;
+}
+
+::ng-deep .mat-select-placeholder {
+    color: $primary-color;
+}
+
+::ng-deep  .mat-select-arrow {
+    color: $primary-color;
+}
+
+::ng-deep  .mat-select-arrow-wrapper {
+    height: 0 !important;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+}
+
+::ng-deep .mat-form-field .mat-select.mat-select-invalid .mat-select-arrow {
+    color: #386AA0;
+}
+
+::ng-deep .mat-option {
+    color: #386AA0;
+}
+
+::ng-deep  .mat-select-value {
+    color: $primary-color;
+    padding: 0 10px;
+    font-size: 13px;
+}
+
+::ng-deep  .mat-option.mat-active {
+    background: rgba(0, 0, 0, 0.04);
+    color: #386AA0;
+}
+
+::ng-deep  .mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
+    font-size: 10px !important;
+    line-height: 3em;
+    height: 3em;
+}
+
+
+thead{
+    background-color: $primary-color; 
+    color: white;
+}
+
+th{
+    padding: 20px 0;
+    border-right: 1px solid #9DB6D0;
+}
+
+td{
+    text-align: center;
+    padding: 10px;
+}
+
+table td {
+    border: 1px solid $primary-color;
+    color: $primary-color;
+}
+
+.view-button{
+    border-radius: 10px;
+    border: 2px solid $primary-color;
+}
+
+.main-width{
+    width: 40%;
+}
+
+.button-width{
+    width: 20%;
+    position: relative;
+    bottom: 9px;
+}
+
+.top-section{
+    margin: 0 auto;
+    width: 90%;
+}
+
+.button-style{
+    border-radius: 10px;
+    padding: 5px 20px;
+}

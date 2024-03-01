@@ -1,0 +1,150 @@
+@import '../../../../../../assets/scss/variables.scss';
+
+.top-container{
+    height: 50vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #9DB6D0;
+}
+
+.search-width{
+    width: 90%;
+}
+
+::ng-deep .sort-form{
+    input, select{
+        color: $primary-color !important;
+        font-size: 12px !important;
+    }
+    
+    &.mat-form-field-appearance-fill .mat-form-field-wrapper {
+        padding-bottom: 0 !important;
+    }
+
+    &.mat-form-field-appearance-fill .mat-form-field-flex {
+        padding: 0 10px !important;
+        background: #DEEBFC !important;
+        border-radius: 10px;
+    }
+
+    &.mat-form-field-appearance-fill .mat-form-field-underline {
+        display: none !important;
+    }
+
+    &.mat-form-field-appearance-fill .mat-form-field-infix {
+        padding: 10px 0 !important;
+    }
+
+    .mat-select-value {
+        color: $primary-color;
+        font-size: 12px;
+    }
+
+    .mat-select-arrow-wrapper {
+        display: none !important;
+    }
+
+    .mat-select-arrow {
+        display: none !important;
+    }
+
+    .mat-select-placeholder {
+        transition: color 400ms 133.3333333333ms cubic-bezier(0.25, 0.8, 0.25, 1);
+        color: $primary-color;
+    }
+}
+
+.divider{
+    height: 45vh;  
+}
+
+.divider2{
+    height: 40vh;  
+}
+
+::ng-deep .mat-divider-vertical {
+    border-right-color: #9DB6D0 !important;
+}
+
+.list-box{
+    padding: 0 20px;
+    width: 49%;
+}
+
+.profile-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.profile-image{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.avatar{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.name{
+    font-size: 12px;
+    font-weight: 700;
+    color: $primary-color;
+}
+
+.username{
+    margin-top: 5px;
+    font-size: 12px;
+    color: $primary-color;
+}
+
+.loader-positioning{
+    width: 100%;
+    height: 100%;
+}
+
+.add-button{
+    border-radius: 10px;
+}
+
+.bottom-container{
+    height: 40vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: #9DB6D0;
+    background-color: $primary-color;
+}
+
+.color-empty{
+    color: #9DB6D0;
+    font-size: 14px;
+}
+
+.group-name{
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+}
+
+.group-username{
+    margin-top: 5px;
+    font-size: 12px;
+    color: white;
+}
+
+.group{
+    font-size: 13px;
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}

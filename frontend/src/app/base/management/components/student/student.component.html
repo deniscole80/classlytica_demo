@@ -1,0 +1,27 @@
+<div class="wrapper">
+    <mat-tab-group class="custom-tab">
+        <mat-tab *ngIf="isManager">
+            <ng-template mat-tab-label>
+                <span><img src="assets/images/add.svg"></span>
+                &nbsp; &nbsp;
+                <span>Register</span>
+            </ng-template>
+
+            <ng-template matTabContent>
+                <app-register></app-register>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span><img src="assets/images/St.svg"></span>
+                &nbsp; &nbsp;
+                <span>Student List</span>
+            </ng-template>
+
+            <ng-template matTabContent>
+                <app-student-list></app-student-list>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>

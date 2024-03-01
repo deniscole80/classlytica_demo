@@ -1,0 +1,45 @@
+<div *ngIf="!loading && !error && followList.length > 0">
+    <div class="flex-btw container mt-1" *ngFor="let follow of followList">
+        <div class="profile-section">
+            <div style="cursor: pointer;" (click)="getProfile(follow)" class="profile-circle">
+                <img class="profile-avatar" *ngIf="follow?.user?.profile_img" 
+                [src]="imageUrl + follow?.user.profile_img">
+                <img class="profile-avatar" *ngIf="follow?.school?.profile_img"
+                [src]="imageUrl + follow?.school.profile_img">
+                <img class="profile-avatar" *ngIf="!follow?.user?.profile_img && !follow?.school?.profile_img" src="/assets/images/nomad.svg">
+            </div>
+    
+            &nbsp;
+    
+            <div>
+                <div style="cursor: pointer;" (click)="getProfile(follow)" class="name">{{follow?.user ? follow?.user.first_name + ' ' + follow?.user.last_name : follow?.school.school_name}}</div>
+                <div style="cursor: pointer;" (click)="getProfile(follow)" class="username">@{{follow?.user ? follow?.user.username : follow?.school.username}}</div>
+            </div>
+        </div>
+    
+        &nbsp;
+        &nbsp;
+    
+        <div class="details-section">
+            <div class="follow-text">Started following you</div>
+            <div class="follow-text">{{getTime(follow?.createdAt)}}</div>
+        </div>
+    
+        <div class="follow-bubble" [class]="{'follow-bubble-active': follow?.following}"
+        (click)="followToggle(follow)">
+            {{follow?.following ? 'unfollow' : 'follow'}}
+        </div>
+    </div>
+</div>
+
+<div class="flex-center page-height" *ngIf="loading">
+    <app-app-loader></app-app-loader>
+</div>
+
+<div class="flex-center page-height" *ngIf="!loading && error">
+    <app-error-state [message]="error" (retry)="getNotifications()"></app-error-state>
+</div>
+
+<div class="flex-center page-height" *ngIf="!loading && !error && followList.length == 0">
+    <app-empty-state [message]="'No follow requests'" [image]="'follow'"></app-empty-state>
+</div>

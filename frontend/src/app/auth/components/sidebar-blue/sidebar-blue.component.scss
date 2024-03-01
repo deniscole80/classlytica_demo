@@ -1,0 +1,171 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/mixins.scss";
+
+.page-flex{
+    display: flex;
+    height: 100vh;
+    background-color: #F1F5FA;
+
+    @include respond(big-phone){
+        flex-direction: column;
+        height: auto;
+    }
+}
+
+.sigup-header-section{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    color: #0F4C8D;
+    width: 50%;
+    margin: 60px auto 0;
+    text-align: center;
+
+    @include respond(big-phone){
+        width: 80%;
+    }
+}
+
+.side-nav{
+    width: 50%;
+    height: 100%;
+    background-color: $primary-color;
+    border-top-right-radius: 50px;
+    position: relative;
+
+    @include respond(big-phone){
+        height: auto;
+        width: 100%;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+    }
+}
+
+.login-section{
+    width: 50%;
+    height: 100vh;
+    overflow-y: auto;
+
+    @include respond(big-phone){
+        width: 100%;
+        height: auto;
+        overflow: unset;
+    }
+}
+
+.signup-height{
+    width: 50%;
+    margin: 60px auto 0;
+    text-align: center;
+    background-color: transparent;
+
+    @include respond(big-phone){
+        width: 80%;
+        margin: 40px auto 0;
+    }
+}
+
+
+.top-section{
+   height: 50%; 
+}
+
+.top-height{
+    margin-top: 140px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    @include respond(big-phone){
+        margin: 70px 0;
+    }
+}
+
+.bottom-section{
+    width: 100%;
+
+    @include respond(big-phone){
+        display: none;
+    }
+}
+
+.header-section{
+    margin-top: 40px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 19px;
+    color: #FFFFFF;
+}
+
+.sub-section{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #FFFFFF;
+    width: 35%;
+    text-align: center;
+}
+
+.image-positoning{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 85%;
+}
+
+//Mat Slider classes
+
+::ng-deep .mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-bar {
+    background-color: $primary-color !important;
+}
+
+::ng-deep .mat-slide-toggle-thumb {
+    height: 21px !important;
+    width: 21px !important;
+    border-radius: 50% !important;
+    display: block;
+}
+
+::ng-deep .mat-slide-toggle-bar {
+    position: relative;
+    width: 50px !important;
+    height: 22px !important;
+    flex-shrink: 0;
+    border-radius: 30px !important;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: white !important;
+}
+
+::ng-deep .mat-slide-toggle-thumb-container {
+    position: absolute;
+    height: 20px;
+    top: 0 !important;
+}
+
+::ng-deep .mat-slide-toggle-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $primary-color;
+    font-size: 11px;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-ripple-element {
+    background-color: transparent;
+}   
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: transparent;
+}
+
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-container {
+    transform: translate3d(28px, 0, 0) !important;
+}
+
+::ng-deep .mat-slide-toggle .mat-slide-toggle-ripple {
+    display: none !important;
+}

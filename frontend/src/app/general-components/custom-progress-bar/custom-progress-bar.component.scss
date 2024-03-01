@@ -1,0 +1,46 @@
+@import "../../../assets/scss/variables.scss";
+@import "../../../assets/scss/mixins.scss";
+
+.container{
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    position: relative;
+}
+
+.solid-container{
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    position: relative;
+    border: 1px solid #E7EDF4;
+}
+
+.progress{
+    background-color: $secondary-color;
+    border-radius: 10px;
+    white-space: nowrap;
+    text-align: center;
+    width: 70%;
+    height: 20px;
+}
+
+.progress-yellow{
+    background-color: #F9CD34;
+    border-radius: 10px;
+    white-space: nowrap;
+    text-align: center;
+    width: 70%;
+    height: 20px;
+}
+
+.text{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 10px;
+    color: $primary-color;
+    font-weight: 500;
+}

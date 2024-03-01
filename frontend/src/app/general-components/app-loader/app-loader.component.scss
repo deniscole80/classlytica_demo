@@ -1,0 +1,32 @@
+
+.loader-width{
+    width: 100%;
+    height: 100%;
+}
+
+.center-positioning{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wait-text{
+    animation: fadeOut ease 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    color: #0f4c8d;
+    font-weight: 500;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity:1;
+    }
+    50% {
+        opacity:0.2;
+    }
+    100% {
+        opacity: 1;
+    }
+}

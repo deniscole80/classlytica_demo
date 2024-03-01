@@ -1,0 +1,172 @@
+<div class="container custom-scroll-bar mt-2">
+    <div *ngIf="!cvLoading">
+        <div class="flex-btw">
+            <div>
+                <div class="name-text">
+                    {{lastName ? firstName + ' ' + lastName : firstName}}
+                </div>
+    
+                <div class="username-text">
+                    @{{userName}}
+                </div>
+            </div>
+    
+            <div>
+                <mat-icon style="cursor: pointer;" color="primary" routerLink="/app/profile">cancel</mat-icon>
+            </div>
+        </div>
+    
+        <form [formGroup]="cvForm">
+            <div class="personal-section">
+                <div class="name-text">Personal Details</div>
+        
+                <div class="mt-2">
+                    <div class="flex-el">
+                        <div class="form-box split-el">
+                            <div class="box-label">First Name</div>
+                            <mat-form-field class="custom-box-field" appearance="fill">
+                                <input type="text" formControlName="firstname" placeholder="John" matInput>
+                            </mat-form-field>
+                        </div>
+        
+                        &nbsp;
+                        &nbsp;
+        
+                        <div class="form-box split-el">
+                            <div class="box-label">Last Name</div>
+                            <mat-form-field class="custom-box-field" appearance="fill">
+                                <input type="text" formControlName="lastname" placeholder="Doe" matInput>
+                            </mat-form-field>
+                        </div>
+                    </div>
+        
+                    <div class="flex-el mt-1">
+                        <div class="form-box split-el">
+                            <div class="box-label">Address</div>
+                            <mat-form-field class="custom-box-field" appearance="fill">
+                                <input type="text" formControlName="address" placeholder="House 1, someplace" matInput>
+                            </mat-form-field>
+                        </div>
+        
+                        &nbsp;
+                        &nbsp;
+        
+                        <div class="form-box split-el">
+                            <div class="box-label">Phone Number</div>
+                            <mat-form-field class="custom-box-field" appearance="fill">
+                                <input type="text" formControlName="mobile" placeholder="0800 000 0000" matInput>
+                            </mat-form-field>
+                        </div>
+                    </div>
+        
+                    <div class="flex-el mt-1">
+                        <div class="form-box split-el">
+                            <div class="box-label">Email</div>
+                            <mat-form-field class="custom-box-field" appearance="fill">
+                                <input type="text" formControlName="email" placeholder="someone@example.com" matInput>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div style="padding: 20px 0;">
+                <mat-divider class="divide"></mat-divider>
+            </div>
+        
+            <div class="personal-section">
+                <div class="name-text">Education</div>
+        
+                <div class="mt-2">
+                    <div class="form-box full-width">
+                        <div class="school-label">Primary School Education</div>
+                        <mat-form-field class="custom-box-field" appearance="fill">
+                            <input type="text" formControlName="primary" matInput>
+                        </mat-form-field>
+                    </div>
+        
+                    <div class="form-box full-width mt-1">
+                        <div class="school-label">Secondary School Education</div>
+                        <mat-form-field class="custom-box-field" appearance="fill">
+                            <input type="text" formControlName="secondary" matInput>
+                        </mat-form-field>
+                    </div>
+        
+                    <div class="form-box full-width mt-1">
+                        <div class="school-label">University Education</div>
+                        <mat-form-field class="custom-box-field" appearance="fill">
+                            <input type="text" formControlName="university" matInput>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>    
+        </form>
+        
+        <div style="padding: 20px 0;">
+            <mat-divider class="divide"></mat-divider>
+        </div>
+    
+        <div class="personal-section">
+            <div class="name-text">Work Experience</div>
+    
+            <table class="mt-2">
+                <thead>
+                    <th>Place</th>
+                    <th>Duration</th>
+                    <th>Role</th>
+                    <th style="background: none; width: 60px;"></th>
+                </thead>
+    
+                <tbody>
+                    <tr *ngFor="let row of tableList; let i = index">
+                        <td>
+                            <mat-form-field class="custom-box-field table" appearance="fill">
+                                <input type="text" [(ngModel)]="row.work_place" matInput>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="custom-box-field table" appearance="fill">
+                                <input type="text" [(ngModel)]="row.duration" matInput>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="custom-box-field table" appearance="fill">
+                                <input type="text" [(ngModel)]="row.role" matInput>
+                            </mat-form-field>
+                        </td>
+                        <div style="text-align: center;">
+                            <mat-icon style="cursor: pointer; color: #0F4C8D;" (click)="add(i)">add_box</mat-icon>
+                            <mat-icon style="cursor: pointer; color: #0F4C8D;" (click)="delete(i)">remove</mat-icon>
+                        </div>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div class="flex-end mt-1 mb-3">
+            <button (click)="submitCv()" [disabled]="cvForm.invalid || loading"
+            mat-flat-button color="primary" class="big-round-button">
+                <span *ngIf="loading" class="spinner-positioning">
+                    <mat-progress-spinner
+                    diameter="20"
+                    color="primary"
+                    mode="indeterminate">
+                    </mat-progress-spinner>
+                </span>
+                <span *ngIf="!loading">Submit</span>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="cvLoading">
+        <div class="flex-center loader-positioning">
+            <app-app-loader></app-app-loader>
+        </div>
+    </div>
+
+    <div *ngIf="!cvLoading && cvError">
+        <div class="flex-center loader-positioning">
+            <app-error-state></app-error-state>
+        </div>
+    </div>
+</div>

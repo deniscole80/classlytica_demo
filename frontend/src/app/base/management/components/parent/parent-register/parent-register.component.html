@@ -1,0 +1,175 @@
+<div class="top-container mt-2">
+    <div class="list-box" >
+        <div class="search">
+            <mat-form-field appearance="fill" floatLabel="never" class="sort-form search-width">
+                <input type="text" matInput placeholder="Search Parent" [(ngModel)]="searchText" (keyup)="searchParent()">
+                <div matSuffix><mat-icon color="primary">search</mat-icon></div>
+            </mat-form-field>
+        </div>
+
+        <div [style.height.px]="innerHeight" class="custom-scroll-bar">
+            <div *ngIf="parentList?.length > 0 && !searchLoading && !searchError">
+                <div class="mt-1 profile-section" *ngFor="let parent of parentList">
+                    <div class="flex-btw full-width">
+                        <div class="flex-el">
+                            <div class="profile-image">
+                                <img class="avatar" [src]="parent?.profile_img ? imgUrl +  parent?.profile_img : '/assets/images/nomad.svg'">
+                            </div>
+                            &nbsp;
+                            &nbsp;
+                            <div>
+                                <div class="name">{{parent?.first_name + ' ' + parent?.last_name}}</div>
+                                <div class="username">@{{parent?.username}}</div>
+                            </div>
+                        </div>
+        
+                        <div>
+                            <button (click)="addParent(parent)" mat-flat-button class="add-button" color="primary">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loader-positioning flex-center" *ngIf="searchLoading">
+                <app-app-loader></app-app-loader>
+            </div>
+
+            <div class="loader-positioning flex-center" *ngIf="!searchLoading && !searchError && parentList?.length <= 0">
+                <app-empty-state [width]="80" [message]="'No results'"></app-empty-state>
+            </div>
+
+            <div class="loader-positioning flex-center" *ngIf="!searchLoading && searchError">
+                <app-error-state [message]="searchError"></app-error-state>
+            </div>
+        </div>
+    </div>
+    <div>
+        <mat-divider class="divider" [vertical]="true"></mat-divider>
+    </div>
+    <div class="list-box">
+        <div class="search">
+            <mat-form-field appearance="fill" floatLabel="never" class="sort-form search-width">
+                <input type="text" matInput placeholder="Search Student" [(ngModel)]="searchText2" (keyup)="searchStudent()">
+                <div matSuffix><mat-icon color="primary">search</mat-icon></div>
+            </mat-form-field>
+        </div>
+
+        <div [style.height.px]="innerHeight" class="custom-scroll-bar">
+            <div *ngIf="studentList?.length > 0 && !searchLoading && !searchError">
+                <div class="mt-1 profile-section" *ngFor="let student of studentList">
+                    <div class="flex-btw full-width">
+                        <div class="flex-el">
+                            <div class="profile-image">
+                                <img class="avatar" [src]="student?.img ? imgUrl +  student?.img : '/assets/images/nomad.svg'">
+                            </div>
+                            &nbsp;
+                            &nbsp;
+                            <div>
+                                <div class="name">{{student?.first_name + ' ' + student?.last_name}}</div>
+                            </div>
+                        </div>
+        
+                        <div>
+                            <button (click)="addStudent(student)" mat-flat-button class="add-button" color="primary">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loader-positioning flex-center" *ngIf="searchLoading2">
+                <app-app-loader></app-app-loader>
+            </div>
+
+            <div class="loader-positioning flex-center" *ngIf="!searchLoading2 && !searchError2 && studentList?.length <= 0">
+                <app-empty-state [width]="80" [message]="'No results'"></app-empty-state>
+            </div>
+
+            <div class="loader-positioning flex-center" *ngIf="!searchLoading2 && searchError2">
+                <app-error-state [message]="searchError"></app-error-state>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bottom-container mt-2">
+    <div class="list-box">
+        <div [style.height.px]="innerHeight2" class="custom-scroll-bar">
+            <div *ngIf="parentGroup.length > 0 && !parentLoading">
+                <div class="mt-1 profile-section" *ngFor="let parent of parentGroup">
+                    <div class="flex-btw full-width">
+                        <div class="flex-el">
+                            <div class="profile-image">
+                                <img class="avatar" [src]="parent?.profile_img ? imgUrl +  parent?.profile_img : '/assets/images/nomad.svg'">
+                            </div>
+                            &nbsp;
+                            &nbsp;
+                            <div>
+                                <div class="group-name">{{parent?.first_name + ' ' + parent?.last_name}}</div>
+                            </div>
+                        </div>
+
+                        <div (click)="removeParent(parent)" style="cursor: pointer;">
+                            <mat-icon>close</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loader-positioning flex-center" *ngIf="parentLoading">
+                <app-app-loader></app-app-loader>
+            </div>
+
+            <div class="loader-positioning flex-center color-empty" *ngIf="!parentLoading && parentGroup.length <= 0">
+                No Parents Yets
+            </div>
+        </div>
+    </div>
+    <div>
+        <mat-divider class="divider2" [vertical]="true"></mat-divider>
+    </div>
+    <div class="list-box">
+        <div [style.height.px]="innerHeight2" class="custom-scroll-bar">
+            <div *ngIf="studentGroup.length > 0 && !studentLoading">
+                <div class="mt-1 profile-section" *ngFor="let student of studentGroup">
+                    <div class="flex-btw full-width">
+                        <div class="flex-el">
+                            <div class="profile-image">
+                                <img class="avatar" [src]="student?.img ? imgUrl +  student?.img : '/assets/images/nomad.svg'">
+                            </div>
+                            &nbsp;
+                            &nbsp;
+                            <div>
+                                <div class="group-name">{{student?.first_name + ' ' + student?.last_name}}</div>
+                            </div>
+                        </div>
+
+                        <div (click)="removeStudent(student)" style="cursor: pointer;">
+                            <mat-icon>close</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loader-positioning flex-center" *ngIf="studentLoading">
+                <app-app-loader></app-app-loader>
+            </div>
+
+            <div class="loader-positioning flex-center color-empty" *ngIf="!studentLoading && studentGroup.length <= 0">
+                No Students Yets
+            </div>
+        </div>
+        <div class="flex-end group mb-1" *ngIf="!groupLoading" (click)="groupItems()">
+            Group Now
+        </div>
+
+        <div class="flex-end group mb-1" *ngIf="groupLoading" >
+            <span class="spinner-positioning">
+                <mat-progress-spinner
+                diameter="20"
+                color="primary"
+                mode="indeterminate">
+                </mat-progress-spinner>
+            </span> 
+        </div>
+    </div>
+</div>

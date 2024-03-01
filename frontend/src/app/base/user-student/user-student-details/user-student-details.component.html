@@ -1,0 +1,132 @@
+<div class="container mt-2" *ngIf="!classLoading">
+    <div class="start">
+        <div class="left-width">
+            <div>
+                <div class="name-text">
+                    {{userData?.first_name ? userData?.first_name + ' ' + userData?.last_name :
+                    userData?.user?.school_name}}
+                </div>
+
+                <!-- <div class="username-text">
+                    @{{userData?.user?  .username}}
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-2 flex-section">
+        <div class="text-width flex-start">
+            <div class="header">
+                Gender
+            </div>
+
+            <div class="details">
+                {{userData?.gender ? userData?.gender : 'N/A' | titlecase}}
+            </div>
+
+        </div>
+
+        <div class="text-width flex-start">
+            <div class="header">
+                Date of Birth
+            </div>
+
+            <div class="details">
+                {{formatDate(userData?.dob)}}
+            </div>
+
+        </div>
+
+        <div class="text-width">
+            <div class="header">
+                Class
+            </div>
+
+            <div class="details">
+                {{class.school ? class.school + " " + class.level : 'N/A'}}
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="mt-2 flex-section">
+        <div class="text-width flex-start">
+            <div class="header">
+                Country
+            </div>
+
+            <div class="details">
+                {{userData?.country ? userData?.country : 'N/A'}}
+            </div>
+
+        </div>
+
+        <div class="text-width">
+            <div class="header">
+                State
+            </div>
+
+            <div class="details">
+                {{userData?.state ? userData?.state : 'N/A'}}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="mt-1 flex-start bottom-section" *ngIf="!classLoading">
+    <div class="display-width parent-section">
+        <div>
+            <div class="parent-header">Attached Parents</div>
+            <div class="group-section">
+                <div *ngFor="let kid of parentList; let i = index" class="flex-el mr-2">
+                    <div class="kid-wrapper">
+                        <img style="cursor: pointer;" class="kid-circle"
+                            [src]="kid.profile_img ? imageUrl + kid.profile_img : '/assets/images/nomad.svg'">
+                    </div>
+                    <div (click)="viewParent(kid)" class="kids-more">View Profile</div>
+                </div>
+
+            </div>
+
+            <div *ngIf="parentList.length == 0" class="kid-empty">
+                Not Assigned
+            </div>
+        </div>
+    </div>
+    <div>
+        <mat-divider [vertical]="true"></mat-divider>
+    </div>
+    <div class="display-width parent-section">
+        <div>
+            <div class="parent-header">Class Teacher</div>
+            <div class="group-section" *ngIf="!teacherLoading && teacher">
+                <div class="kid-wrapper">
+                    <img style="cursor: pointer;" class="kid-circle"
+                        [src]="teacher.profile_img ? imageUrl + teacher.profile_img : '/assets/images/nomad.svg'">
+                </div>
+
+                <div (click)="checkTeacher(teacher)" class="kids-more" >View Profile</div>
+            </div>
+
+            <div *ngIf="!teacherLoading && teacher == null" class="kid-empty">
+                Not Assigned
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="button-section" *ngIf="!classLoading">
+    <div class="button red">Remark <img src="assets/images/remark.svg" alt="rem" style="width: 20px;"></div>
+    <div class="button greenish">Report Card <img src="assets/images/card.svg" alt="card" style="width: 20px;"></div>
+    <!-- <div class="button white">Assign Parent <img src="assets/images/link.svg" alt="link" style="width: 20px;"></div> -->
+    <div class="button black" *ngIf="userType == 1">Disciplinary <img src="assets/images/discipline.svg" alt="disc" style="width: 20px;"></div>
+</div>
+
+<div class="mt-1 tab-section" *ngIf="!classLoading">
+    <div class="header">
+        Media
+    </div>
+    <app-user-student-media></app-user-student-media>
+</div>

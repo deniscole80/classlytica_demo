@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="flex-start">
+        <div class="search mt-1">
+            <mat-form-field appearance="fill" floatLabel="never" class="sort-form search-width">
+                <input type="text" matInput placeholder="Enter Role Name" [(ngModel)]="roleName">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="access-section">
+        <div class="header mt-2 mb-1">
+            Accessibity
+        </div>
+        <div class="flex-btw wrap main-section">
+            <div class="flex-width mb-2" *ngFor="let item of roleList">
+                <mat-checkbox [checked]="item.isChecked" (change)="pushRoles(item, $event.checked)"
+                color="primary">
+                &nbsp; <span class="check-item">{{item.name}}</span>
+                </mat-checkbox>
+                &nbsp; 
+                <span class="drop" style="cursor: pointer;" (click)="open = !open; open2 = false;" 
+                *ngIf="item.isDrop && item.name == 'Class Teacher'">
+                    <span class="dd-text">{{selectedClass?.alias}} {{selectedClass?.level}}</span>
+                    <span>
+                        <mat-icon style="position: relative; top: 8px;" color="primary" *ngIf="!open">chevron_right</mat-icon>
+                        <mat-icon style="position: relative; top: 8px;" color="primary" *ngIf="open">expand_more</mat-icon>
+                    </span>
+                </span>
+
+                <div class="menu" (click)="open = !open;"  *ngIf="open && item.isDrop && item.name == 'Class Teacher'">
+                    <div (click)="selectValue(child)" mat-menu-item *ngFor="let child of studentList" class="custom-mat-menu">
+                        <span>{{child?.alias}} {{child?.level}}</span>
+                    </div>
+                </div>
+
+                <span class="drop" style="cursor: pointer;" (click)="open2 = !open2; open = false;" 
+                *ngIf="item.isDrop && item.name == 'Subject Teacher'">
+                    <mat-icon style="position: relative; top: 8px;" color="primary" *ngIf="!open2">chevron_right</mat-icon>
+                    <mat-icon style="position: relative; top: 8px;" color="primary" *ngIf="open2">expand_more</mat-icon>
+                </span>
+
+                <div class="menu" *ngIf="open2 && item.isDrop && item.name == 'Subject Teacher'">
+                    <div mat-menu-item *ngFor="let subject of subjectList" class="custom-mat-menu"
+                    routerLinkActive="child-active">
+                        <mat-checkbox (change)="checkSubject(subject ,$event.checked)" [checked]="subject.checked" color="primary">
+                        </mat-checkbox> &nbsp;
+                        <span>{{subject?.subject_name}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="flex-end button-section">
+            <button [disabled]="allRoles.length == 0 || loading || roleName == ''" mat-flat-button 
+            (click)="createRole()" color="primary">
+            <span *ngIf="loading" class="spinner-positioning">
+                <mat-progress-spinner
+                diameter="30"
+                color="primary"
+                mode="indeterminate">
+                </mat-progress-spinner>
+            </span>
+            <span *ngIf="!loading">Edit Role</span>
+            </button>
+        </div>
+    </div>
+</div>

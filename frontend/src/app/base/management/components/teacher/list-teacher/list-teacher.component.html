@@ -1,0 +1,101 @@
+<div style="padding-top: 5%;">
+    <div class="filter-section flex-btw">
+        <div class="sort flex-el">
+            <!-- <div class="mr-2">
+                <mat-form-field appearance="outline" floatLabel="never" class="sort-form" style="width: 100px;">
+                    <mat-select placeholder="Age">
+                        <mat-option>1</mat-option>
+                    </mat-select>
+                    <div matSuffix>
+                        <img class="dd-img" src="/assets/images/arrow.svg" width="10" style="cursor: pointer;">
+                    </div>
+                </mat-form-field>
+            </div>
+
+            <div class="mr-2">
+                <mat-form-field appearance="outline" floatLabel="never" class="sort-form" style="width: 120px;">
+                    <mat-select placeholder="Gender">
+                        <mat-option>Male</mat-option>
+                        <mat-option>Female</mat-option>
+                    </mat-select>
+                    <div matSuffix>
+                        <img class="dd-img" src="/assets/images/arrow.svg" width="10" style="cursor: pointer;">
+                    </div>
+                </mat-form-field>
+            </div>
+
+            <div class="mr-2">
+                <mat-form-field appearance="outline" floatLabel="never" class="sort-form" style="width: 120px;">
+                    <mat-select placeholder="Country">
+                        <mat-option *ngFor="let country of countries" [value]="country.name">
+                            {{country.name}}
+                        </mat-option>
+                    </mat-select>
+                    <div matSuffix>
+                        <img class="dd-img" src="/assets/images/arrow.svg" width="10" style="cursor: pointer;">
+                    </div>
+                </mat-form-field>
+            </div>
+
+            <div style="position: relative; top: -8px;">
+                <button mat-flat-button color="primary" class="sort-button">Sort</button>
+            </div> -->
+        </div>
+
+        <div class="search">
+            <mat-form-field appearance="outline" floatLabel="never" class="sort-form">
+                <input [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" matInput placeholder="Search Staff">
+                <div matSuffix><img class="dd-img" src="/assets/images/search-primary.svg" width="10" style="cursor: pointer;"></div>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="flex-center" *ngIf="loading">
+        <app-app-loader></app-app-loader>
+    </div>
+
+    <div class="flex-center" *ngIf="!loading && !error && studentList.length <= 0">
+        <app-empty-state message="No staff yet"></app-empty-state>
+    </div>
+
+    <div class="flex-center" *ngIf="!loading && error">
+        <app-error-state [message]="message" (retry)="getTeachers()"></app-error-state>
+    </div>
+
+    <div *ngIf="!loading && !error && studentList.length > 0">
+        <table class="table-section">
+            <thead>
+                <th></th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Middle Name</th>
+                <th>Gender</th>
+                <th>Country</th>
+                <!-- <th></th> -->
+            </thead>
+    
+            <tbody>
+                <tr *ngFor="let student of studentList$ | async; let i = index">
+                    <td><img class="student-img" [src]="student.profile_img ? imgUrl + student.profile_img :  '/assets/images/nomad.svg'" 
+                        alt="profile pic"></td>
+                    <td>{{student.first_name}}</td>
+                    <td>{{student.last_name}}</td>
+                    <td>{{student.other_name ? student.other_name : 'N/A'}}</td>
+                    <td>{{student.gender}}</td>
+                    <td>{{student.country}}</td>
+                    <!-- <td>
+                        <button mat-stroked-button color="primary" class="view-button">View Profile</button>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="moreLoading " class="more-positioning mt-1">
+        <mat-progress-spinner
+        diameter="30"
+        color="primary"
+        mode="indeterminate">
+        </mat-progress-spinner>
+    </div>
+</div>

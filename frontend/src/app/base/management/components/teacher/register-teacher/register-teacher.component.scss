@@ -1,0 +1,163 @@
+@import '../../../../../../assets/scss/variables.scss';
+
+::ng-deep .sort-form{
+    input, select{
+        color: $primary-color !important;
+        font-size: 12px !important;
+    }
+    
+    &.mat-form-field-appearance-fill .mat-form-field-wrapper {
+        padding-bottom: 0 !important;
+    }
+
+    &.mat-form-field-appearance-fill .mat-form-field-flex {
+        padding: 0 10px !important;
+        background: #DEEBFC !important;
+    }
+
+    &.mat-form-field-appearance-fill .mat-form-field-underline {
+        display: none !important;
+    }
+
+    &.mat-form-field-appearance-fill .mat-form-field-infix {
+        padding: 10px 0 !important;
+    }
+
+    .mat-select-value {
+        color: $primary-color;
+        font-size: 12px;
+    }
+
+    .mat-select-arrow-wrapper {
+        display: none !important;
+    }
+
+    .mat-select-arrow {
+        display: none !important;
+    }
+
+    .mat-select-placeholder {
+        transition: color 400ms 133.3333333333ms cubic-bezier(0.25, 0.8, 0.25, 1);
+        color: $primary-color;
+    }
+}
+
+::ng-deep .mat-option-text{
+    font-size: 13px;
+    color: $primary-color;
+}
+
+.left-side{
+    width: 35%;
+    background: #F1F5FA;
+    padding: 40px 20px;
+}
+
+.right-side{
+    width: 65%;
+    background: #DEEBFC;
+    padding: 40px 20px;
+}
+
+.title{
+    font-size: 16px;
+    font-weight: 600;
+    padding: 40px;
+    border-bottom: 1px solid $primary-color;
+    color: $primary-color;
+}
+
+.search-list{
+    display: flex;
+    padding-top: 20px;
+
+    &.response{
+        padding: 20px 30px;
+        border-bottom: 1px solid $primary-color;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .user-circle{
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .profile-circle{
+        background-color: #FFFFFF;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        position: relative;
+        margin-right: 30px;
+
+        img{
+            width: 100%;
+        }
+
+        .country-flag{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            position: absolute;
+            right: 0;
+            top: 0px;
+            background: white;
+
+            img{
+                position: relative;
+                top: -3px;
+            }
+        }
+    }
+
+    .text-sec{
+        line-height: 2;
+        color: $primary-color;
+
+        .name{
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .at{
+            font-weight: 500;
+        }
+
+        .send-btn{
+            border-radius: 15px;
+            border-width: 2px;
+            border-color: #0F4C8D;
+            font-size: 12px;
+        }
+    }
+
+    .status{
+        line-height: 2;        
+        color: $primary-color;
+        font-weight: 500;
+        font-size: 12px;
+        padding-bottom: 10px;
+    }
+}
+
+.dd-img{
+    width: 20px;
+    padding: 5px;
+    position: relative;
+    top: 4px;
+}
+
+.profile-circle{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+::ng-deep .green-bkg{
+    .mat-dialog-container{
+        background: #91E55E !important;
+    }
+}

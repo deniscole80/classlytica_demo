@@ -1,0 +1,83 @@
+<div *ngIf="!cvLoading && !cvError && cvLoad?.message != 'not found'" class="container">
+    <div class="mt-2 flex-btw heading-section">
+        <div class="header">
+            Curriculum Vitae
+        </div>
+    
+        <div style="cursor: pointer;" (click)="closeModal()">
+            <img src="/assets/images/cancelcv.svg">
+        </div>
+    </div>
+    
+    <div class="mt-6">
+        <div class="section-header">
+            Personal Details
+        </div>
+    
+        <div>
+            <div class="flex-el top-margin">
+                <div class="label">First Name: &nbsp; {{cvLoad?.firstname}}</div>
+            </div>
+    
+            <div class="flex-el top-margin">
+                <div class="label">Last Name: &nbsp; {{cvLoad?.lastname}}</div>
+            </div>
+    
+            <div class="flex-el top-margin">
+                <div class="label">Address: &nbsp; {{cvLoad?.address}}</div>
+            </div>
+    
+            <div class="flex-el top-margin">
+                <div class="label">Phone Number: &nbsp; {{cvLoad?.mobile}}</div>
+            </div>
+    
+            <div class="flex-el top-margin">
+                <div class="label">Email: &nbsp; {{cvLoad?.email}}</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <div class="section-header">
+            Education
+        </div>
+    
+        <div>
+            <div class="flex-el top-margin">
+                <div class="label">Primary Education: &nbsp; {{cvLoad?.pry_school}}</div>
+            </div>
+    
+            <div class="flex-el top-margin">
+                <div class="label">Secondary Education: &nbsp; {{cvLoad?.sec_school}}</div>
+            </div>
+    
+            <div class="flex-el top-margin">
+                <div class="label">University Education: &nbsp; {{cvLoad?.university}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div class="section-header">
+            Work Experience
+        </div>
+    
+        <div *ngFor="let experience of cvLoad.experience">
+            <div class="flex-el top-margin">
+                <div class="label">Worked at {{experience?.pry_school}} as a {{experience?.role}} ({{experience?.duration}})</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="cvLoading" class="flex-center loader-positioning">
+    <app-app-loader></app-app-loader>
+</div>
+
+<div *ngIf="!cvLoading && !cvError && cvLoad?.message == 'not found'" class="flex-center loader-positioning">
+    <app-empty-state message="No CV Found"></app-empty-state>
+</div>
+
+<div *ngIf="!cvLoading && cvError" class="flex-center loader-positioning">
+    <app-error-state [message]="message" (retry)="retrieveCv()"></app-error-state>
+</div>

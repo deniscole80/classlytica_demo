@@ -1,0 +1,24 @@
+<div (scroll)="onScroll($event)" class="custom-scroll-bar full-height">
+    <div class="top-container"  [style.background-image]="backgroundImage ? 'url('+imageUrl + backgroundImage+')' : 'url('+ '/assets/images/cover.png' +')'">
+        <div class="image-section mt-4">
+            <div (click)="selectPicture()" [style.background-image]="profileImage ? 'url('+imageUrl + profileImage +')' : 'url('+ '/assets/images/nomad.svg' +')'" class="image-circle">
+                <img class="blue-camera" src="assets/images/camera-blue.svg" width="20" alt="blue.svg">
+            </div>
+        </div>
+    
+        <div class="flex-end">
+            <input type="file" hidden #upload accept="image/*" (change)="setImage($event)">
+            <img class="grey-camera" (click)="upload.click()" 
+            src="assets/images/camera-grey.svg" width="30" alt="grey.svg">
+        </div>
+    </div>
+    
+    <div class="profile-details">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<div [ngClass]="{'dialog': true, 'slide-up': selectImage, 'slide-down': !selectImage}" >
+    <app-set-profile-pic (image)="selectImages($event)"></app-set-profile-pic>
+</div>
+ 

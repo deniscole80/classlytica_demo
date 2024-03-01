@@ -1,0 +1,50 @@
+@import "../../../../../assets/scss/variables.scss";
+@import "../../../../../assets/scss/mixins.scss";
+
+
+.container{
+    height: 100%; 
+    padding: 20px;
+}
+
+.text{
+    width: 100%;
+    background-color: #E7EDF4;
+    border-radius: 10px;
+    border: none;
+    padding: 25px 50px 25px 10px;
+    resize: none;
+    height: 100%;
+    color: $primary-color;
+
+    &:focus-visible{
+        outline: none;
+    }
+}
+
+.text-area-icon{
+    position: relative;
+}
+
+.icon-top{
+    position: absolute;
+    top: 8px;
+    right: 15px;
+}
+
+.icon-bottom{
+    position: absolute;
+    bottom: 13px;
+    right: 20px;
+}
+
+.flex-upload{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+
+.text-font{
+    font-size: 11px;
+}

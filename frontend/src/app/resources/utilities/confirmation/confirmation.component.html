@@ -1,0 +1,20 @@
+<div class="dialog-top flex-btw">
+  <div class="dialog-title">{{data.header}}</div>
+  <button mat-icon-button style="background-color: white;" (click)="onCancel()">
+      <mat-icon class="small-icon">close</mat-icon>
+  </button>
+</div>
+
+<div class="dialog-wrapper">
+
+  <div>{{data.message}}</div>
+
+      <div class="full-width mt-2">
+          <button mat-flat-button color="primary" class="full-width" (click)="deleteAccount()"
+           >
+
+              <span>{{data.buttonText}}</span>
+          </button>
+      </div>
+
+</div>

@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="log">
+        <img src="assets/images/app_logo_blue.png" width="200" alt="logo">
+    </div>
+
+    <div *ngIf="step == 1" class="mt-3 full-width">
+        <app-profile-picture (stepNumber)="stepNumber($event)"></app-profile-picture>
+    </div>
+
+    <div *ngIf="step == 2" class="mt-3">
+        <app-interest (stepNumber)="stepNumber($event)"></app-interest>
+    </div>
+
+    <div *ngIf="step == 3" class="mt-3 full-width and">
+        <app-suggestions (stepNumber)="stepNumber($event)"></app-suggestions>
+    </div>
+</div>

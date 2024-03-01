@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="text-area-icon">
+        <div class="flex-end icon-top">
+            <img style="cursor: pointer" (click)="closeText()" src="assets/images/cancel_text.svg" />
+        </div>
+        <textarea #myInput [(ngModel)]="text" class="text" name="text" cols="40" rows="10"></textarea>
+        <div (click)="addPost()" class="flex-end icon-bottom">
+            <img *ngIf="!loading" style="cursor: pointer" src="assets/images/send_text.svg" />
+            <mat-progress-spinner *ngIf="loading"
+                diameter="30"
+                color="primary"
+                mode="indeterminate">
+            </mat-progress-spinner>
+        </div>
+    </div>
+
+    <div class="mt-1 flex-upload">
+        <div class="flex-el" style="cursor: pointer" (click)="addPhoto()">
+            <img src="assets/images/image_upload.svg" />
+            &nbsp; &nbsp;
+            <div class="text-font">Upload Image</div>
+        </div>
+
+        <div class="flex-el" style="cursor: pointer" (click)="addVideo()">
+            <img src="assets/images/video_upload.svg" />
+            &nbsp; &nbsp;
+            <div class="text-font">Upload Video</div>
+        </div>
+    </div>
+</div>

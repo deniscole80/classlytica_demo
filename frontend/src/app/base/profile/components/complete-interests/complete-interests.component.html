@@ -1,0 +1,73 @@
+<div class="container mt-2 custom-scroll-bar">
+    <div class="flex-btw">
+        <div>
+            <div class="name-text">
+                {{lastName ? firstName + ' ' + lastName : firstName}}
+            </div>
+
+            <div class="username-text">
+                @{{userName}}
+            </div>
+        </div>
+
+        <div routerLink="/app/profile">
+            <mat-icon style="cursor: pointer;" color="primary">cancel</mat-icon>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <div class="header">
+            Complete your profile here.
+        </div>
+
+        <div class="mt-1" *ngIf="!loading && error">
+            <app-error-state  [message]="message" (retry)="getInterests()"></app-error-state>
+        </div>
+        
+        <div class="mt-1" *ngIf="loading">
+            <app-app-loader></app-app-loader>
+        </div>
+
+        <div  *ngIf="interests.length > 0 && !loading">
+            <div class="item-container mt-1" *ngIf="interests.length > 0">
+                <div class="item" *ngFor="let item of interests; let i = index"
+                [ngClass]="{'item': item, 'active-item': item.active == 1}" (click)="setActive(item, i)">
+                    {{item.interest}}
+                </div>
+            </div>        
+        </div>
+        
+        <div class="mt-4" *ngIf="interests.length <= 0 && !loading">
+            <app-empty-state [message]="'No Interests available'"></app-empty-state>
+        </div>
+    </div>
+
+    <div class="mt-1">
+        <div  class="header">
+            Bio
+        </div>
+
+        <div class="mt-1">
+            <textarea [(ngModel)]="text" class="text" name="text" cols="40" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div *ngIf="submitError" class="errormsg">{{submitError}}</div>
+        <div class="flex-center mb-2">
+            <button class="submit-section" color="primary" mat-flat-button (click)="completeInterests()" 
+            [disabled]="activeInterest.length == 0 || !text || submitLoading">
+                <span *ngIf="submitLoading" class="spinner-positioning">
+                    <mat-progress-spinner
+                    diameter="20"
+                    color="primary"
+                    mode="indeterminate">
+                    </mat-progress-spinner>
+                </span>
+                <span *ngIf="!submitLoading">Submit</span>
+            </button>
+        </div>
+    </div>
+
+
+</div>

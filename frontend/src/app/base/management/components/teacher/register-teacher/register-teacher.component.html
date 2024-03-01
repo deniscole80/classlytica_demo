@@ -1,0 +1,112 @@
+<div style="padding: 10% 0 0;">
+   <div class="flex-btw" style="align-items: stretch; min-height: 65vh;">
+        <div class="left-side">
+            <div class="search">
+                <mat-form-field appearance="fill" floatLabel="never" class="sort-form">
+                    <input type="text" matInput placeholder="Search Staff" [(ngModel)]="searchText" (keyup)="search()">
+                    <div matSuffix><mat-icon color="primary">search</mat-icon></div>
+                </mat-form-field>
+            </div>
+
+            <div class="flex-center">
+                <app-app-loader style="height: 40vh;" *ngIf="searchLoading"></app-app-loader>
+
+                <app-empty-state style="height: 40vh;" [message]=" 'Search for a staff' " *ngIf="!searchLoading && searchList.length == 0"></app-empty-state>
+            </div>
+
+            <div class="search-cover mt-3" *ngIf="!searchLoading && searchList.length > 0">
+                <div class="search-list" *ngFor="let teach of searchList; let i = index">
+                    <div class="profile-circle">
+                        <img class="user-circle" *ngIf="!teach.profile_img" src="assets/images/nomad.svg" alt="profile_pic">
+                        <img class="user-circle" *ngIf="teach.profile_img" [src]="imageUrl + teach.profile_img" alt="profile_pic">
+                        <!-- <div class="country-flag"><img src="assets/images/Nigeria.svg" alt="flag"></div> -->
+                    </div>
+
+                    <div class="text-sec">
+                        <div class="name">{{teach.first_name}} {{teach.other_name}} {{teach.last_name}}</div>
+                        <div class="at">@{{teach.username}}</div>
+                        <div class="mt-1">
+                            <button mat-stroked-button [disabled]="requestLoading" class="send-btn" (click)="sendRequest(teach, i)" color="primary" *ngIf="!teach.isSent || user != 1">
+                                <span *ngIf="requestLoading && user == i">
+                                    <mat-progress-spinner
+                                    diameter="16"
+                                    color="primary"
+                                    mode="indeterminate">
+                                    </mat-progress-spinner>
+                                </span>
+                                <span *ngIf="!requestLoading || user != i">send add request</span>
+                            </button>
+
+                            <div *ngIf="teach.isSent && user == i"> Sent</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-side">
+            <div class="title flex-btw">
+                <div>Response Queue</div>
+
+                <div>
+                    <mat-form-field appearance="fill" floatLabel="never" class="sort-form" style="width: 150px;">
+                        <mat-select placeholder="Sort" [(ngModel)]="status" (selectionChange)="getRequestList()">
+                            <mat-option value="pending">Pending</mat-option>
+                            <mat-option value="accepted">Accepted</mat-option>
+                            <mat-option value="declined">Declined</mat-option>
+                            <mat-option value="confirmed">Confirmed</mat-option>
+                            <mat-option value="cancelled">Canceled</mat-option>
+                        </mat-select>
+                        <div matSuffix>
+                            <img class="dd-img" src="/assets/images/arrow.svg" width="10" style="cursor: pointer;">
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="flex-center">
+                <app-app-loader style="margin-top: 20%;" *ngIf="responseLoading"></app-app-loader>
+
+                <app-empty-state style="height: 40vh;" [message]=" 'Response List empty' " *ngIf="!responseLoading && responseList.length == 0"></app-empty-state>
+            </div>
+
+            <div *ngIf="!responseLoading && responseList.length > 0">
+                <div class="search-list response" *ngFor="let teach of responseList">
+                    <div class="flex-el">
+                        <div class="profile-circle">
+                            <img class="user-circle" *ngIf="!teach.user?.profile_img" style="width: 100%;" src="assets/images/nomad.svg" alt="profile_pic">
+                            <img class="user-circle" *ngIf="teach.user?.profile_img" style="width: 100%;" [src]="imageUrl + teach.user?.profile_img" alt="profile_pic">
+                            <!-- <div class="country-flag"><img src="assets/images/Nigeria.svg" alt="flag"></div> -->
+                        </div>
+        
+                        <div class="text-sec">
+                            <div class="name">{{teach.user?.first_name}} {{teach.user?.other_name}} {{teach.user?.last_name}}</div>
+                            <div class="at">@{{teach.user?.username}}</div>
+                        </div>
+                    </div>
+    
+                    <div style="width: 25%;">
+                        <div class="status">{{teach.status == 'pending' ? 'Awaiting Teacher Response' : teach.status | titlecase}}</div>
+    
+                        <div class="status-icons" *ngIf="!actionLoading">
+                            <button *ngIf="teach.status == 'accepted' || teach.status == 'pending' " mat-icon-button style="color: white; background-color: red;" matTooltip="Cancel" (click)="requestAction('cancelled', teach)"><mat-icon>close</mat-icon></button>
+                            &nbsp;
+                            <button *ngIf="teach.status == 'accepted' " mat-icon-button style="color: white; background-color: greenyellow;" matTooltip="Confirm" (click)="requestAction('confirmed', teach)"><mat-icon>done_all</mat-icon></button>
+                            &nbsp;
+                            <!-- <button *ngIf="teach.status == 'declined' " mat-icon-button style="color: white; background-color: blue;" matTooltip="View" (click)="requestAction('declined', teach)"><mat-icon>visibility</mat-icon></button> -->
+                        </div>
+    
+                        <div *ngIf="actionLoading">
+                            <mat-progress-spinner
+                            diameter="16"
+                            color="primary"
+                            mode="indeterminate">
+                            </mat-progress-spinner>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+   </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="flex-btw">
+    <div class="header">
+        {{type}}
+    </div>
+    <div>
+        <mat-icon style="cursor: pointer;" (click)="closeModal()" color="warn">
+          close
+        </mat-icon>
+    </div>
+</div>
+
+<div *ngIf="dataList.length > 0">    
+    <div class="container mt-1 custom-scroll-bar">
+        <div class="flex-btw mb-3" *ngFor="let list of dataList">
+            <div class="flex-el">
+                <div (click)="userProfile(list)" class="avatar-section">
+                    <!-- [src]="list?.user ? list?.user?.profile_img : list?.school?.profile_img" -->
+                    <img *ngIf="list?.user?.profile_img != null || list?.school?.profile_img != null" class="avatar" 
+                    [src]="list?.user ? imageUrl + list?.user?.profile_img : imageUrl + list?.school?.profile_img">
+    
+                    <img *ngIf="list?.user?.profile_img == null && list?.school?.profile_img == null" class="avatar" 
+                    src="/assets/images/nomad.svg">
+                </div>
+                &nbsp;
+                <div>
+                    <div (click)="userProfile(list)" class="name">
+                        {{list?.user ? list?.user?.first_name + ' ' + list?.user?.last_name : list?.school?.school_name}}
+                    </div>
+    
+                    <div (click)="userProfile(list)" class="username">@{{list?.user ? list?.user?.username : list?.school?.username}}</div>
+                </div>
+            </div>
+            <div *ngIf="checkType(list)">
+                <div class="remove" *ngIf="type == 'Following'"  (click)="followToggle(list)"
+                [ngClass]="{'remove': list?.id == 0, 'following': list?.id}">
+                {{list?.id != 0 ? 'Unfollow' : 'Follow'}}
+                </div>
+    
+                <div *ngIf="type == 'Followers'" (click)="followToggle(list)" 
+                 [ngClass]="{'following': list?.following, 'remove': !list?.following}">
+                    {{list?.following ? 'Unfollow' : 'Follow'}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-2 container" *ngIf="dataList.length == 0">
+    <app-empty-state *ngIf="type == 'Followers'" 
+    [message]="'No followers'" [image]="'follow'" [width]="50">
+    </app-empty-state>
+    <app-empty-state *ngIf="type == 'Following'" [width]="50"
+    [message]="'No following'" [image]="'follow'">
+    </app-empty-state>
+</div>

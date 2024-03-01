@@ -1,0 +1,116 @@
+<div [ngClass]="{'white-container': i % 2 == 0, 'smoke-container': i % 2 == 1}"
+    *ngFor="let notification of allNotifications; let i = index">
+    <div class="flex-el avatar-width">
+        <div (click)="getProfile(notification)" style="cursor: pointer;" class="profile" *ngIf="!notification.employment_request">
+            <img class="avatar" *ngIf="notification?.user?.profile_img != null"
+            [src]="profileUrl + notification?.user.profile_img" alt="">
+            <img class="avatar" *ngIf="notification?.school?.profile_img != null"
+            [src]="profileUrl + notification?.school.profile_img " alt="">
+            <img class="avatar" 
+            *ngIf="notification?.user?.profile_img == null && notification?.school?.profile_img == null" src="/assets/images/nomad.svg">
+        </div>
+
+        <div *ngIf="notification.employment_request" style="position: relative;">
+            <div (click)="getProfile(notification)" style="cursor: pointer;" class="profile small left">
+                <img class="avatar" *ngIf="notification?.user?.profile_img != null"
+                [src]="profileUrl + notification?.user.profile_img" alt="">
+                <img class="avatar" 
+                *ngIf="notification?.user?.profile_img == null && notification?.school?.profile_img == null" src="/assets/images/nomad.svg">
+            </div>
+
+            <div (click)="getProfile(notification)" style="cursor: pointer;" class="profile small right">
+                <img class="avatar" *ngIf="notification?.school?.profile_img != null"
+                [src]="profileUrl + notification?.school.profile_img " alt="">
+                <img class="avatar" 
+                *ngIf="notification?.user?.profile_img == null && notification?.school?.profile_img == null" src="/assets/images/nomad.svg">
+            </div>
+        </div>
+
+        &nbsp;
+        &nbsp;
+
+        <div>
+            <div (click)="getProfile(notification)" style="cursor: pointer;" class="name">{{notification?.user ? notification?.user.first_name + ' ' + notification?.user.last_name : notification?.school.school_name}}</div>
+            <div (click)="getProfile(notification)" style="cursor: pointer;" class="username">@{{notification?.user ? notification?.user.username : notification?.school.username}}</div>
+        </div>
+    </div>
+
+    <div class="description">
+        <div class="font" *ngIf="!notification.employment_request">shared a post</div>
+        <div class="font" *ngIf="notification.employment_request">sent employment request</div>
+        <div class="font">{{getTime(notification?.createdAt)}}</div>
+    </div>
+
+    <div *ngIf="!notification.employment_request">
+        <div style="position: relative; width: 100%;" *ngIf="notification?.post?.image != null || notification?.post?.video != null" class="post">
+            <img class="post-avatar"  *ngIf="notification?.post?.image" [src]="imageUrl + notification?.post?.image[0]">
+    
+            <div style="position: absolute;" *ngIf="notification?.post?.video"><mat-icon>play_circle</mat-icon></div>
+            <video class="full-width feed-radius post-video" *ngIf="notification?.post?.video">
+                <source [src]="videoUrl + notification?.post?.video" type="video/mp4">
+                <source [src]="videoUrl + notification?.post?.video" type="video/ogg">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <div class="image-width" *ngIf="notification.employment_request != null">
+        <div *ngIf="notification.employment_request.status == 'pending' " class="flex-el wrap">
+            <button mat-flat-button color="primary" style="margin-top: 10px;" (click)="acceptRequest(notification, i)" [disabled]="declineLoading || acceptLoading">
+                <div *ngIf="acceptLoading && sel == i">
+                    <mat-progress-spinner
+                    diameter="16"
+                    color="primary"
+                    mode="indeterminate">
+                    </mat-progress-spinner>
+                </div>
+                <span *ngIf="!acceptLoading || sel != i">Accept</span>
+            </button>
+            &nbsp;
+            <button mat-button color="primary" style="margin-top: 10px;" (click)="declineRequest(notification, i)" [disabled]="declineLoading || acceptLoading">
+                <div *ngIf="declineLoading && sel == i">
+                    <mat-progress-spinner
+                    diameter="16"
+                    color="primary"
+                    mode="indeterminate">
+                    </mat-progress-spinner>
+                </div>
+                <span *ngIf="!declineLoading || sel != i">Decline</span>
+            </button>
+        </div>
+
+        <div class="image-width" *ngIf="notification.employment_request.status != 'pending' ">
+            {{notification.employment_request.status | titlecase}}
+        </div>
+    </div>
+
+    <div *ngIf="!notification.employment_request">
+        <div  class="image-width" *ngIf="notification?.post?.image == null && notification?.post?.video == null">
+            <img class="none-avatar" src="/assets/images/none.svg">
+        </div>
+    </div>
+
+    <!-- <div  *ngIf="!notification?.post && notification?.type == 'interest'" class="follow-bubble-active">
+        Respond
+    </div> -->
+</div>
+
+<div class="flex-center page-height" *ngIf="loading">
+    <app-app-loader></app-app-loader>
+</div>
+
+<div class="flex-center page-height" *ngIf="!loading && error">
+    <app-error-state [message]="error" (retry)="getNotifications()"></app-error-state>
+</div>
+
+<div class="flex-center page-height" *ngIf="!loading && !error && allNotifications.length == 0">
+    <app-empty-state [message]="'No notifications'" [image]="'all'"></app-empty-state>
+</div>
+
+<div *ngIf="moreLoading" class="more-positioning mt-1">
+    <mat-progress-spinner
+    diameter="30"
+    color="primary"
+    mode="indeterminate">
+    </mat-progress-spinner>
+</div>

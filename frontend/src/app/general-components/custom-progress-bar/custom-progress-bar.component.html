@@ -1,0 +1,13 @@
+<div [ngClass]="{'container': !isSolid, 'solid-container': isSolid}">
+    <div *ngIf="percentage >= 50" class="progress" [style.width.%]="percentage">
+
+    </div>
+
+    <div *ngIf="percentage < 50" class="progress-yellow" [style.width.%]="percentage">
+
+    </div>
+
+    <div class="text">
+        {{percentage}}% profile completed
+    </div>
+</div>

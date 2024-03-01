@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="flex-btw">
+        <div class="upload-notice">
+            <b style="color: #4e0000;">Note:</b> Maximum of four (4) images
+        </div>
+
+        <div><img style="cursor: pointer" (click)="closeText()" src="assets/images/close_grey.svg"/></div>
+    </div>
+    <div class="flex-btw mt-1 section-height">
+        <div class="left">
+            <div [ngClass]="{'left-section': true, 'two': imageList.length > 1 && imageList.length < 3, 'four': imageList.length > 2}">
+                <div class="image-box" (click)="upload.click()" *ngFor="let image of imageList; let i = index">
+                    <div [ngClass]="{'cancel': imageList.length > 1, 'hide': imageList.length == 1}" (click)="cancel(i); $event.stopPropagation()"><mat-icon style="color: grey; background-color: white;">close</mat-icon></div>
+                    <img [src]="image.imgName" class="image-avatar" *ngIf="image.imgName">
+                    <img src="assets/images/upload.svg" width="25" alt="" *ngIf="!image.imgName">
+                    <input type="file" hidden #upload accept="image/*" (change)="setImage($event, image)">
+                </div>
+            </div>
+        </div>
+    
+        <div class="right-section">
+            <div class="text-area-icon">
+                <textarea #myInput [(ngModel)]="message" class="text" name="text" cols="40" rows="10"></textarea>
+                <div class="flex-end icon-bottom" (click)="addPost()">
+                    <img *ngIf="!loading" style="cursor: pointer" src="assets/images/send_text.svg" />
+                    <mat-progress-spinner *ngIf="loading"
+                        diameter="30"
+                        color="primary"
+                        mode="indeterminate">
+                    </mat-progress-spinner>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

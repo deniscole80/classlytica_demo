@@ -1,0 +1,155 @@
+<div *ngIf="!loading && !error">
+    <div class="container mt-2">
+        <div class="flex-btw">
+            <div>
+                <div class="name-text">
+                    {{lastName ? firstName + ' ' + lastName : firstName}}
+                </div>
+    
+                <div class="username-text">
+                    @{{userName}}
+                </div>
+            </div>
+            
+        </div>
+    
+        <div class="center-progress mt-2">
+            <div class="progress-width">
+                <app-custom-progress-bar [isSolid]="true" [percentage]="percentage"></app-custom-progress-bar>
+            </div>
+    
+    
+            <div class="progress-width flex-start">
+                <button class="edit-button" color="primary" mat-flat-button (click)="completeSignUp()">
+                    Edit Profile
+                </button>
+            </div>
+        </div>
+    
+        <div class="mt-1 flex-start">
+            <span (click)="completeProfile()" class="complete-link">
+                {{percentage == 100 ? 'Set bio and interests' : 'Complete profile now'}}
+            </span>
+        </div>
+    
+        <div class="mt-2 flex-section">
+            <div class="text-width flex-start">
+                <div class="header">
+                    Bio
+                </div>
+    
+                <div class="details">
+                    {{bio? bio : 'N/A'}}
+                </div>
+    
+            </div>
+    
+            <div class="text-width flex-start">
+                <div class="header">
+                    Current Role
+                </div>
+    
+                <div class="details">
+                    {{currentRole ? currentRole.role_name  : 'N/A'}}{{currentEmployer ? ' at ' + currentEmployer : ''}}
+                </div>
+    
+            </div>
+    
+            <div class="text-width">
+                <div class="header">
+                    Interest
+                </div>
+    
+                <div class="details">
+                    {{interests ? interests.join(", ") : 'N/A'}}
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-2 follow-section flex-btw">
+        <div class="display-width flex-btw">
+            <div class="follow-width">
+                <app-follow-count (click)="viewList('followers')" style="cursor: pointer;" [text]="'Followers'" [count]="followers"></app-follow-count>
+            </div>
+            <div class="follow-width">
+                <app-follow-count (click)="viewList('following')" style="cursor: pointer;" [text]="'Following'" [count]="following"></app-follow-count>
+            </div>
+        </div>
+
+        <div class="display-width parent-section" *ngIf="userType == 2">
+           <div *ngIf="!kidLoading && kidList.length > 0">
+                <div class="parent-header">Attached Students</div>
+                <div class="group-section">
+                    <div *ngFor="let kid of kidList; let i = index" [ngClass]="{'hide': i >= 3}"
+                    class="kid-wrapper">
+                        <img (click)="viewKids()" style="cursor: pointer;" class="kid-circle" 
+                        [src]="kid.img ? imgUrl + kid.img : '/assets/images/nomad.svg'">
+                    </div>
+
+                    <div (click)="viewKids()" class="kids-more" *ngIf="kidList.length > 3">
+                        {{kidList.length - 3}} more
+                    </div>
+                </div>
+           </div>
+
+            <div class="flex-el" *ngIf="kidLoading">
+                <span class="spinner-positioning">
+                    <mat-progress-spinner
+                    diameter="20"
+                    color="primary"
+                    mode="indeterminate">
+                    </mat-progress-spinner>
+                </span>
+                &nbsp;
+                &nbsp;
+
+                <div class="kid-text">
+                    Loading kids
+                </div>
+           </div>
+        </div>
+    </div>
+    
+    <div class="mt-1 flex-start bottom-section">
+        <button class="cv-button" mat-stroked-button color="primary" (click)="editCv()">Edit CV</button>
+    </div>
+    
+    <div class="mt-1 tab-section">
+        <mat-tab-group (selectedTabChange)="tabChanged($event)" animationDuration="1000ms">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <img *ngIf="tabValue != 0" src="assets/images/feed_icon.svg">
+                    <img *ngIf="tabValue == 0" src="assets/images/feed_active.svg">
+                    &nbsp;
+                    &nbsp;
+                    <span [ngClass]="{'active-Tab': tabValue == 0}">Feed</span>
+                </ng-template>
+                <ng-template matTabContent>
+                    <app-user-feed [scroll]="scroll"></app-user-feed>
+                </ng-template>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <img *ngIf="tabValue == 1" src="assets/images/media_icon.svg">
+                    <img *ngIf="tabValue != 1" src="assets/images/media_icon.svg">
+                    &nbsp;
+                    &nbsp;
+                    <span [ngClass]="{'active-Tab': tabValue == 1}">Media</span>
+                </ng-template>
+                <ng-template matTabContent>
+                    <app-user-media></app-user-media>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+
+<div *ngIf="loading" class="loader-positioning flex-center">
+    <app-app-loader></app-app-loader>
+</div>
+
+<div *ngIf="!loading && error" class="loader-positioning flex-center">
+    <app-app-loader></app-app-loader>
+</div>

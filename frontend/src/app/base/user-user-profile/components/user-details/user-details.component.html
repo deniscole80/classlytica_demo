@@ -1,0 +1,143 @@
+<div class="container mt-2">
+    <div class="start">
+        <div class="left-width">
+            <div>
+                <div class="name-text">
+                    {{userData?.user?.first_name ? userData?.user.first_name + ' ' + userData?.user.last_name : userData?.user?.school_name}}
+                </div>
+    
+                <div class="username-text">
+                    @{{userData?.user?.username}}
+                </div>
+            </div>
+    
+            <div (click)="followToggle(userData)" 
+            [ngClass]="{'following': userData?.following, 'remove': !userData?.following}">
+                {{userData?.following ? 'Following' : 'Follow'}}
+            </div>
+        </div>
+
+        <div style="cursor: pointer;">
+            <app-chat-active></app-chat-active>
+        </div>
+        
+    </div>
+
+    <div class="mt-2 flex-section">
+        <div class="text-width flex-start">
+            <div class="header">
+                Bio
+            </div>
+
+            <div class="details">
+                {{userData?.user?.bio ? userData?.user?.bio : 'N/A'}}
+            </div>
+
+        </div>
+
+        <div class="text-width flex-start">
+            <div class="header">
+                Current Role
+            </div>
+
+            <div class="details">
+                {{userData?.user?.current_role ? userData?.user?.current_role : 'N/A'}}{{userData?.user?.current_employer ? ' at ' + userData?.user?.current_employer : ''}}
+            </div>
+
+        </div>
+
+        <div class="text-width">
+            <div class="header">
+                Interest
+            </div>
+
+            <div class="details">
+                {{userData?.user?.interests ? userData?.user?.interests.join(", ") : 'N/A'}}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="mt-2 follow-section flex-btw">
+    <div class="display-width flex-btw">
+        <div class="follow-width">
+            <app-follow-count (click)="viewList('followers')" style="cursor: pointer;" [text]="'Followers'" [count]="userData?.followers"></app-follow-count>
+        </div>
+        <div class="follow-width">
+            <app-follow-count (click)="viewList('following')" style="cursor: pointer;" [text]="'Following'" [count]="userData?.followings"></app-follow-count>
+        </div>
+    </div>
+
+    <div class="display-width parent-section" *ngIf="userData.user.status == 'parent' ">
+        <div *ngIf="!kidLoading && kidList.length > 0">
+             <div class="parent-header">Attached Students</div>
+             <div class="group-section">
+                 <div *ngFor="let kid of kidList; let i = index" [ngClass]="{'hide': i >= 3}"
+                 class="kid-wrapper">
+                     <img (click)="viewKids()" style="cursor: pointer;" class="kid-circle" 
+                     [src]="kid.img ? imageUrl + kid.img : '/assets/images/nomad.svg'">
+                 </div>
+
+                 <div (click)="viewKids()" class="kids-more" *ngIf="kidList.length > 3">
+                     {{kidList.length - 3}} more
+                 </div>
+             </div>
+        </div>
+
+         <div class="flex-el" *ngIf="kidLoading">
+             <span class="spinner-positioning">
+                 <mat-progress-spinner
+                 diameter="20"
+                 color="primary"
+                 mode="indeterminate">
+                 </mat-progress-spinner>
+             </span>
+             &nbsp;
+             &nbsp;
+
+             <div class="kid-text">
+                 Loading kids
+             </div>
+        </div>
+     </div>
+</div>
+
+<div class="mt-1 flex-start bottom-section">
+    <div class="button-section">
+        <div class="button white">Show Interest <img src="/assets/images/cvicon.svg" alt="link" style="width: 20px;"></div>
+        <!-- <div class="button black" *ngIf="userData?.user?.status == 'parent' && userType == 1">Assign Student <img src="assets/images/link-white.svg" alt="link" style="width: 20px;"></div> -->
+        <div class="button light-red" *ngIf="userData?.user?.status == 'parent' && userType == 2">Report <img src="assets/images/warn.svg" alt="link" style="width: 20px;"></div>
+        <div class="button dark-red" *ngIf="userData?.user?.status == 'parent' && userType == 2">Block <img src="assets/images/block.svg" alt="link" style="width: 20px;"></div>
+        <button class="cv-button" (click)="viewCv()" mat-stroked-button color="primary" *ngIf="userData?.user?.status == 'teacher'">View CV</button>
+    </div>
+</div>
+
+<div class="mt-1 tab-section">
+    <mat-tab-group (selectedTabChange)="tabChanged($event)" animationDuration="1000ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <img *ngIf="tabValue != 0" src="assets/images/feed_icon.svg">
+                <img *ngIf="tabValue == 0" src="assets/images/feed_active.svg">
+                &nbsp;
+                &nbsp;
+                <span [ngClass]="{'active-Tab': tabValue == 0}">Feed</span>
+            </ng-template>
+            <ng-template matTabContent>
+                <app-user-user-feed [userData]="userData"></app-user-user-feed>
+            </ng-template>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <img *ngIf="tabValue == 1" src="assets/images/media_icon.svg">
+                <img *ngIf="tabValue != 1" src="assets/images/media_icon.svg">
+                &nbsp;
+                &nbsp;
+                <span [ngClass]="{'active-Tab': tabValue == 1}">Media</span>
+            </ng-template>
+            <ng-template matTabContent>
+                <app-user-user-media [userData]="userData"></app-user-user-media>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>

@@ -1,0 +1,63 @@
+<div class="flex-image">
+    <div>
+        <img src="assets/images/lightgreenface.svg" width="30" alt="lightgreenface">
+    </div>
+
+    &nbsp;
+
+    <div>
+        <img src="assets/images/greenface.svg" width="60" alt="greenface">
+    </div>
+
+    &nbsp;
+
+    <div>
+        <img src="assets/images/lightgreenface.svg" width="30" alt="lightgreenface">
+    </div>
+
+</div>
+
+<div class="mt-2 main-text">
+    Hi <span class="uppercase-text">{{firstname}}</span>, we are happy to receive you for the first time.
+</div>
+ 
+<div class="main-text">
+    Create your profile here.
+</div>
+
+<div class="mt-2 mb-3 mid-arrangement" *ngIf="backgroundImage"
+[style.background-image]="'url('+imageUrl + backgroundImage+')'" [style.height.px]="innerHeight">
+    <div class="image-section mt-6">
+        <div (click)="selectPicture()" [style.background-image]="profileImage ? 'url('+imageUrl + profileImage+')' : 'url('+ selectedImage+')'" class="image-circle">
+            <img class="blue-camera" src="assets/images/camera-blue.svg" width="30" alt="blue.svg">
+        </div>
+    </div>
+    <div class="flex-end">
+        <input type="file" hidden #upload (change)="setImage($event)">
+        <img class="grey-camera" (click)="upload.click()" 
+        src="assets/images/camera-grey.svg" width="50" alt="grey.svg">
+    </div>
+</div>
+
+<div class="mt-2 mb-3 mid-arrangement" *ngIf="!backgroundImage">
+    <div class="image-section mt-6 image-color">
+        <div (click)="selectPicture()" [style.background-image]="profileImage ? 'url('+imageUrl + profileImage+')' : 'url('+ selectedImage+')'" class="image-circle">
+            <img class="blue-camera" src="assets/images/camera-blue.svg" width="30" alt="blue.svg">
+        </div>
+    </div>
+    <div class="flex-end">
+        <input type="file" hidden #upload (change)="setImage($event)">
+        <img class="grey-camera" (click)="upload.click()" 
+        src="assets/images/camera-grey.svg" width="50" alt="grey.svg">
+    </div>
+</div>
+
+<div class="flex-btw mt-4 button-spacing">
+    <button (click)="next()" class="general-btn-style" color="primary" mat-flat-button>
+        Next
+    </button>
+</div>
+
+<div [ngClass]="{'dialog': true, 'slide-up': selectImage, 'slide-down': !selectImage}" >
+    <app-set-profile-pic (image)="selectImages($event)"></app-set-profile-pic>
+</div>

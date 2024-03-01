@@ -1,0 +1,138 @@
+<div style="padding: 10% 10% 0;">
+    <form [formGroup]="registerForm">
+        <div class="flex-btw mt-1">
+            <div class="split-el">
+                <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                    <span class="form-title signup-form" matPrefix style="position: relative;">
+                        First Name
+                        &nbsp;
+                    </span>
+                    <input formControlName="firstname" type="text" matInput>
+                </mat-form-field>
+            </div>
+
+            <div class="split-el">
+                <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                    <span class="form-title signup-form" matPrefix style="position: relative;">
+                        Last Name
+                        &nbsp;
+                    </span>
+                    <input formControlName="lastname" type="text" matInput>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="flex-btw mt-1">
+            <div class="split-el">
+                <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                    <span class="form-title signup-form" matPrefix style="position: relative;">
+                        Other Names
+                        &nbsp;
+                    </span>
+                    <input formControlName="othernames" type="text" matInput>
+                </mat-form-field>
+            </div>
+
+            <div class="split-el">
+                <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                    <span class="form-title signup-form" matPrefix style="position: relative;">
+                        Gender
+                        &nbsp;
+                    </span>
+                    <mat-radio-group formControlName="gender" color="primary">
+                        <mat-radio-button labelPosition="before" value="male">Male</mat-radio-button>
+                        &nbsp; &nbsp;
+                        <mat-radio-button labelPosition="before" value="female">Female</mat-radio-button>
+                    </mat-radio-group>
+                    <input type="text" hidden matInput>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="flex-btw mt-1">
+            <div class="split-el">
+                <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                    <span class="form-title signup-form" matPrefix style="position: relative;">
+                        Date of Birth
+                        &nbsp;
+                    </span>
+                    <input matInput autocomplete="off" [matDatepicker]="pickers" formControlName="DOB" readonly="readonly">
+                    <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+                    <mat-datepicker #pickers></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="split-el">
+                <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                    <span class="form-title signup-form" matPrefix style="position: relative;">
+                        Class
+                        &nbsp;
+                    </span>
+                    <mat-select formControlName="class">
+                        <mat-option *ngFor="let student of studentList" [value]="student.id">
+                            {{student.school}} {{student.level}} {{student.alias}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="flex-btw mt-1">
+            <div class="split-el">
+                <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                    <span class="form-title signup-form" matPrefix style="position: relative;">
+                        Country
+                        &nbsp;
+                    </span>
+                    <mat-select formControlName="country">
+                        <mat-option *ngFor="let country of countries" [value]="country.name">
+                            {{country.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="split-el">
+                <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                    <span class="form-title signup-form" matPrefix style="position: relative;">
+                        State/Province
+                        &nbsp;
+                    </span>
+                    <input formControlName="stateoforigin" type="text" matInput>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="file-cover">
+            <div class="picker-text">Upload Profile Picture</div>
+
+            <div class="flex-btw mt-2">
+                <div class="file" (click)="upload.click()">
+                    <input type="file" hidden #upload accept="image/*" (change)="setImage($event)">
+                    <img src="assets/images/filepicker.svg" width="80"  alt="filepicker">
+                    <div class="file-text">Not more than 500kb</div>
+                </div>
+
+                <div class="profile-circle">
+                    <img *ngIf="fileSystemImage" class="upload" [src]="fileSystemImage" 
+                    accept=".png,.jpg,.jpeg" alt="image">
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-center mt-5 button-width">
+            <button [disabled]="loading || registerForm.invalid" class="full-width" style="border-radius: 10px;" (click)="addStudent()"
+            mat-flat-button color="primary">
+                <span *ngIf="!loading">Submit</span>
+                <span *ngIf="loading" class="spinner-positioning">
+                    <mat-progress-spinner
+                    diameter="20"
+                    color="primary"
+                    mode="indeterminate">
+                    </mat-progress-spinner>
+                </span>
+            </button>
+        </div>
+    </form>
+</div>

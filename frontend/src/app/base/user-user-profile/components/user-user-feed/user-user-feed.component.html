@@ -1,0 +1,128 @@
+<div class="custom-scroll-bar full-height">    
+    <div class="bottom-section">
+        <div *ngIf="feedList.length > 0 && !error && !loading">
+            <div  *ngFor="let feed of feedList" class="feed-section">
+                <div *ngIf="feed?.post_type == 'shared' && feed?.shared_by_username != null" class="share-section flex-el mb-1">
+                    <img width="11" src="assets/images/share_inactive.svg" alt=""> &nbsp;
+                    Shared by {{feed?.shared_by_username ? feed?.shared_by_username : 'Unknown'}}
+                </div>
+                <div class="flex-top">
+                    <div class="flex-el">
+                        <div class=image-circle>
+                            <img class="image" [src]="userData.user.profile_img ? imageUrl + userData.user.profile_img : defaultPic" alt="">
+                        </div>
+                        &nbsp;
+                        <div class="text-flex">
+                            <div class="top-text">
+                                {{userData?.user?.first_name ? userData?.user.first_name + ' ' + userData?.user.last_name : userData?.user.school_name}}
+                            </div>
+                            <div class="email-text">@{{ userData?.user ? userData?.user.username : userData?.school.username}} &nbsp; <span class="time">{{getTime(feed?.createdAt)}}</span></div>
+                        </div>
+                    </div>
+        
+                    <div>
+                        <mat-icon>
+                            more_horiz
+                        </mat-icon>
+                    </div>
+                </div>
+        
+                <div class="mt-1 caption">
+                    {{feed?.text}}
+                </div>
+        
+                <div class="mt-1">
+                    <div *ngIf="feed?.image != null && feed?.video == null && feed?.image.length == 1" 
+                    class="full-width feed-radius">
+                        <img class="single-height feed-radius" (click)="displayImage(feed.image[0])"
+                        [src]="postUrl + feed?.image[0]" alt="new.png" style="cursor: pointer;">
+                    </div>
+
+                    <div *ngIf="feed?.image != null && feed?.video == null && feed?.image.length > 1" 
+                    class="full-width flex-btw wrap">
+                        <div class="multiple-width"  *ngFor="let image of feed?.image; let i = index;">
+                            <img class="image-height feed-radius" (click)="displayImage(feed.image[i])"
+                            [src]="postUrl + image" style="cursor: pointer;" 
+                            alt="new.png">
+                        </div>
+                    </div>
+            
+                    <div class="full-width feed-radius" *ngIf="feed?.image == null && feed?.video != null" >
+                        <video class="full-width feed-radius" controls>
+                            <source [src]="videoUrl + feed.video" type="video/mp4">
+                            <source [src]="videoUrl + feed.video" type="video/ogg">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+        
+                <div class="mt-1 flex-buttons">
+                    <button (click)="likePost(feed)" mat-button>
+                        <div class="flex-btw">
+                            <span style="position: relative; top: 1px">
+                                <img *ngIf="!feed?.liked_post" width="15" src="assets/images/like_active.svg" alt="">
+                                <img *ngIf="feed?.liked_post" width="15" src="assets/images/like_solid.svg" alt="">
+                            </span> &nbsp;
+                            <span [ngClass]="{'active': feed?.liked_post, 'faded': !feed?.liked_post}">Like</span>
+                        </div>
+                    </button>
+        
+                    <button (click)="sharePost(feed)" mat-button>
+                        <div class="flex-btw">
+                            <span style="position: relative; top: 1px">
+                                <img width="15" *ngIf="!feed?.shared_post" src="assets/images/share_active.svg" alt="">
+                                <img *ngIf="feed?.shared_post" width="15" src="assets/images/share_solid.svg" alt="">
+                            </span> &nbsp;
+                            <span [ngClass]="{'active': feed?.shared_post, 'faded': !feed?.shared_post}">Share</span>
+                        </div>
+                    </button>
+        
+                    <button (click)="commentPost(feed)" mat-button>
+                        <span style="position: relative; top: 1px">
+                            <img width="15" src="assets/images/comment_active.svg" alt="">
+                        </span> &nbsp;
+                        <span class="faded">Comment</span>
+                    </button>
+        
+                </div>
+        
+                <div class="count-section mb-2">
+                    <div class="mt-1 flex-btw full-width">
+                        <app-button-counter class="quarter-width" [width]="15"
+                        [count]="feed?.likes" [image]="'assets/images/like_solid.svg'"></app-button-counter>
+    
+                        <app-button-counter class="quarter-width" [width]="15" 
+                        [count]="feed?.shares" [image]="'assets/images/share_solid.svg'"></app-button-counter>
+    
+                        <app-button-counter class="quarter-width" [width]="15" 
+                        [count]="feed?.comments" [image]="'assets/images/comment_solid.svg'"></app-button-counter>
+    
+                        <div class="quarter-width">
+    
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+        <div *ngIf="moreLoading" class="more-positioning mt-1">
+            <mat-progress-spinner
+            diameter="30"
+            color="primary"
+            mode="indeterminate">
+            </mat-progress-spinner>
+        </div>
+
+        <div class="section-positioning"  *ngIf="loading">
+            <app-app-loader></app-app-loader>
+        </div>
+
+        <div class="section-positioning"  *ngIf="!loading && !error && feedList.length <= 0">
+            <app-empty-state [width]="30" [message]="'No Feed'"></app-empty-state>
+        </div>
+
+        <div class="section-positioning"  *ngIf="!loading && error">
+            <app-error-state [width]="30" [message]="message"></app-error-state>
+        </div>
+    </div>
+</div>

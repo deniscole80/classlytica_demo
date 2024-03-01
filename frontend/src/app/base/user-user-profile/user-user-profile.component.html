@@ -1,0 +1,22 @@
+<div *ngIf="loading" class="loader-positioning">
+    <app-app-loader></app-app-loader>
+</div>
+
+<div *ngIf="!loading && error" class="loader-positioning">
+    <app-error-state></app-error-state>
+</div>
+
+
+<div (scroll)="onScroll($event)" class="custom-scroll-bar full-height" *ngIf="!loading && !error">
+    <div class="top-container" [style.background-image]="backgroundImage ? 'url('+imageUrl + backgroundImage+')' : 'url('+ '/assets/images/cover.png' +')'">
+        <div class="image-section mt-3">
+            <div [style.background-image]="profileImage ? 'url('+imageUrl + profileImage+')' : 'url('+ '/assets/images/nomad.svg' +')'" class="image-circle">
+            </div>
+        </div>
+    </div> 
+
+    <div class="profile-details">
+        <app-user-details [userData]="profileData"></app-user-details>
+    </div>
+</div>
+

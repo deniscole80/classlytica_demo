@@ -1,0 +1,33 @@
+@import '../../../assets/scss/variables.scss';
+
+.wrap{
+    text-align: center;
+    padding: 0 10%;
+    flex-direction: column;
+    height: 100%;
+}
+
+.warn{
+    width: 40px;
+    margin: 0 auto;
+}
+
+.text{
+    padding: 20px 0;
+    line-height: 1.5;
+    font-size: 17px;
+}
+
+.action-but{
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.text-box{
+    height: 10vh;
+    width: 100%;
+    background-color: #f1f5fa;
+    border: 1px solid $primary-color;
+    border-radius: 10px;
+    padding: 10px;
+}

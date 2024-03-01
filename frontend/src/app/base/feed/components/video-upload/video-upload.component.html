@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="flex-end">
+        <img style="cursor: pointer" (click)="closeText()" src="assets/images/close_grey.svg"/>
+    </div>
+    <div class="flex-btw mt-1 section-height">
+        <div class="left-section">
+            <div (click)="upload.click()" class="image-box">
+                <img *ngIf="!fileSystemImage" src="assets/images/upload.svg" width="25" alt="">
+                <video *ngIf="fileSystemImage" class="image-avatar" controls>
+                    <source [src]="fileSystemImage" type="video/mp4">
+                    <source [src]="fileSystemImage" type="video/ogg">
+                    Your browser does not support the video tag.
+                </video>
+                <input type="file" hidden #upload accept="video/*" (change)="setVideo($event)">
+            </div>
+        </div>
+    
+        <div class="right-section">
+            <div class="text-area-icon">
+                <textarea #myInput [(ngModel)]="message" class="text" name="text" cols="40" rows="10"></textarea>
+                <div (click)="addPost()" class="flex-end icon-bottom">
+                    <img *ngIf="!loading" style="cursor: pointer" src="assets/images/send_text.svg" />
+                    <mat-progress-spinner *ngIf="loading"
+                        diameter="30"
+                        color="primary"
+                        mode="indeterminate">
+                    </mat-progress-spinner>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

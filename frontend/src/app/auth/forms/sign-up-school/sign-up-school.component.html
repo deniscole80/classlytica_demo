@@ -1,0 +1,104 @@
+<div class="login-items">
+    <form [formGroup]="signupForm" class="form-section">
+        <div class="mt-2 full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    School Name
+                    &nbsp;
+                </span>
+                <input formControlName="schoolname" type="text" matInput>
+            </mat-form-field>
+        </div>
+        
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Username
+                    &nbsp;
+                </span>
+                <input formControlName="username" type="text" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Address
+                    &nbsp;
+                </span>
+                <input formControlName="address" type="text" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Phone 
+                    &nbsp;
+                </span>
+                <input formControlName="phonenumber1" type="text" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Phone 2
+                    &nbsp;
+                </span>
+                <input formControlName="phonenumber2" type="text" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Email Address
+                    &nbsp;
+                </span>
+                <input formControlName="email" type="email" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field class="full-width signup-form" appearance="fill" color="#E7EDF4">
+                <span class="form-title" matPrefix style="position: relative;">
+                    Institution Type
+                    &nbsp;
+                </span>
+                <mat-select formControlName="institutiontype" placeholder="Select type">
+                    <mat-option value="primary" >Primary</mat-option>
+                    <mat-option value="secondary" >Secondary</mat-option>
+                    <mat-option value="both" >Primary & Secondary</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-checkbox #attest color="primary"></mat-checkbox> &nbsp;
+            <span class="attest">By Signing up, you agree to our <u>Privacy Policy</u> and <u>Terms and Conditions</u></span>
+        </div>
+
+        <div *ngIf="errorMsg" class="errormsg">{{errorMsg}}</div>
+
+        <div class="mt-1 full-width">
+            <button (click)="addAccount()" [disabled]="signupForm.invalid || loading || !attest.checked"
+            class="full-width general-btn-style" color="primary" mat-flat-button>
+            <span *ngIf="loading" class="spinner-positioning">
+                <mat-progress-spinner
+                diameter="30"
+                color="primary"
+                mode="indeterminate">
+                </mat-progress-spinner>
+            </span>
+            <span *ngIf="!loading">Create account</span>
+        </button>
+        </div>
+
+        <div class="mt-3">
+            <span class="forgot-password">Already have an account?</span> &nbsp;
+            <span class="forgot-password link-highlight" routerLink="/"><b>Login</b></span>
+        </div>
+    </form>
+</div>
+

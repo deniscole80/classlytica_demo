@@ -1,0 +1,29 @@
+<div class="flex-page">
+    <div *ngIf="image == 'comment'" class="image-position">
+        <img [width]="width ? width : 200" src="assets/images/no_comment.svg" alt="error.svg">
+    </div>
+
+    <div *ngIf="image == 'like'" class="image-position">
+        <img [width]="width ? width : 200" src="assets/images/no_likes.svg" alt="error.svg">
+    </div>
+
+    <div *ngIf="image == 'follow'" class="image-position">
+        <img [width]="width ? width : 200" src="assets/images/no_followers.svg" alt="error.svg">
+    </div>
+
+    <div *ngIf="image == 'all'" class="image-position">
+        <img [width]="width ? width : 200" src="assets/images/none_all.svg" alt="error.svg">
+    </div>
+
+    <div *ngIf="image == 'image'" class="image-position">
+        <img [width]="width ? width : 200" src="assets/images/no_image.svg" alt="error.svg">
+    </div>
+    
+    <div *ngIf="image == ''" class="image-position">
+        <img [width]="width ? width : 200" src="assets/images/empty_state.svg" alt="error.svg">
+    </div>
+
+    <div class="mt-1 flex-center message-color">
+        {{message ? message : 'Empty' }}
+    </div>
+</div>

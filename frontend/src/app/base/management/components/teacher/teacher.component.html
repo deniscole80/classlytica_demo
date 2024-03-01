@@ -1,0 +1,27 @@
+<div class="wrapper" (scroll)="onScroll($event)" class="custom-scroll-bar full-height">
+    <mat-tab-group class="custom-tab">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span><img src="assets/images/add.svg"></span>
+                &nbsp; &nbsp;
+                <span>Register</span>
+            </ng-template>
+
+            <ng-template matTabContent>
+                <app-register-teacher></app-register-teacher>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span><img src="assets/images/St.svg"></span>
+                &nbsp; &nbsp;
+                <span>Staff List</span>
+            </ng-template>
+
+            <ng-template matTabContent>
+                <app-list-teacher></app-list-teacher>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>

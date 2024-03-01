@@ -1,0 +1,159 @@
+<div class="cover custom-scroll-bar" *ngIf="mode == 'assign'">
+    <div class="top-side">
+        <div class="left-top custom-scroll-bar">
+            <div class="search">
+                <mat-form-field appearance="fill" floatLabel="never" class="sort-form search-width">
+                    <input type="text" matInput placeholder="Search Staff" [(ngModel)]="searchText" (keyup)="search()">
+                    <div matSuffix><mat-icon color="primary">search</mat-icon></div>
+                </mat-form-field>
+            </div>
+
+            <div class="flex-center">
+                <app-app-loader style="height: 40vh;" *ngIf="searchLoading"></app-app-loader>
+
+                <app-empty-state style="height: 40vh;" [message]=" 'Search for a staff' " *ngIf="!searchLoading && memberList.length == 0"></app-empty-state>
+            </div>
+
+            <div class="list-cover">
+                <div class="search-list" *ngFor="let member of memberList; let i = index">
+                    <div class="profile-circle">
+                        <img class="user-circle" *ngIf="!member.profile_img" src="assets/images/nomad.svg"
+                            alt="profile_pic">
+                        <img class="user-circle" *ngIf="member.profile_img" [src]="imageUrl + member.profile_img"
+                            alt="profile_pic">
+                        <!-- <div class="country-flag"><img src="assets/images/Nigeria.svg" alt="flag"></div> -->
+                    </div>
+
+                    <div class="text-sec">
+                        <div class="name">{{member.first_name}} {{member.other_name}} {{member.last_name}}</div>
+                        <div class="at">@{{member.username}}</div>
+                    </div>
+
+                    <div class="mt-1 ml-1" *ngIf="selectedMemberList.length < 1">
+                        <button mat-flat-button [disabled]="requestLoading" class="send-btn" color="primary" (click)="selectStaff(member)">
+                            <span *ngIf="requestLoading && user == i">
+                                <mat-progress-spinner diameter="16" color="primary" mode="indeterminate">
+                                </mat-progress-spinner>
+                            </span>
+                            <span *ngIf="!requestLoading || user != i">Select</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-top">
+            <div class="expansions custom-scroll-bar">
+                <mat-expansion-panel *ngFor="let role of roleList; let i = index" class="expand-faq" [expanded]="open == i"
+                    (opened)="open = i; selectedRole = role" (closed)="selectedRole = '' ">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div class="title full-width flex-btw">
+                                <div>{{role.role_name}}</div>
+                                <div (click)="editRole(role)"><mat-icon color="primary">edit</mat-icon></div>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="description">
+                        <div class="desc" *ngFor="let access of role.access">
+                            <div style="text-transform: capitalize;">{{access.access_name | formatText}}: </div>
+                            &nbsp;
+                            <div>{{access?.text ? access?.text : 'Yes' }}</div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </div>
+
+            <div class="flex-end" *ngIf="selectedRole && selectedRoleList.length < 1">
+                <button mat-flat-button class="send-btn" color="primary" (click)="selectRole()">Select</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-side">
+        <div class="left-bottom custom-scroll-bar">
+            <div class="sub-title">Staff</div>
+            
+            <div class="list-cover">
+                <div class="search-list" *ngFor="let member of selectedMemberList; let i = index">
+                    <div class="profile-circle">
+                        <img class="user-circle" *ngIf="!member.profile_img" src="assets/images/nomad.svg"
+                            alt="profile_pic">
+                        <img class="user-circle" *ngIf="member.profile_img" [src]="imageUrl + member.profile_img"
+                            alt="profile_pic">
+                        <!-- <div class="country-flag"><img src="assets/images/Nigeria.svg" alt="flag"></div> -->
+                    </div>
+
+                    <div class="text-sec">
+                        <div class="name">{{member.first_name}} {{member.other_name}} {{member.last_name}}</div>
+                        <div class="at">@{{member.username}}</div>
+                    </div>
+
+                    <div class="mt-1 ml-1">
+                        <button mat-flat-button [disabled]="requestLoading" class="send-btn" color="primary" (click)="remove(i)">
+                            <span *ngIf="requestLoading && user == i">
+                                <mat-progress-spinner diameter="16" color="primary" mode="indeterminate">
+                                </mat-progress-spinner>
+                            </span>
+                            <span *ngIf="!requestLoading || user != i">Remove</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-bottom">
+            <div class="sub-title">Assigned Roles</div>
+
+            <div class="expansions custom-scroll-bar">
+                <mat-expansion-panel *ngFor="let role of selectedRoleList; let i = index" class="expand-faq colored" [expanded]="open2 == i"
+                    (opened)="open2 = i; openRole = role" (closed)="openRole = ''">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div class="title color flex-btw">
+                                <div>{{role.role_name}}</div>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="description">
+                        <div class="desc" *ngFor="let access of role.access">
+                            <div style="text-transform: capitalize;">{{access.access_name | formatText}}: </div>
+                            &nbsp;
+                            <div>{{access?.text ? access?.text : 'Yes' }}</div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </div>
+
+            <div class="flex-end" *ngIf="openRole">
+                <button mat-flat-button class="send-btn" color="primary" (click)="removeRole()">Remove</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="save flex-end mt-4">
+        <button mat-flat-button class="send-btn" color="primary" (click)="assign()" [disabled]="selectedMemberList.length == 0 || selectedRoleList.length == 0 || assignLoading">
+            <span *ngIf="assignLoading" class="spinner-positioning">
+                <mat-progress-spinner
+                diameter="30"
+                color="primary"
+                mode="indeterminate">
+                </mat-progress-spinner>
+            </span>
+            <span *ngIf="!assignLoading">Save</span>
+        </button>
+    </div>
+</div>
+
+<div *ngIf="mode == 'edit'">
+    <div class="flex-start" style="cursor: pointer;">
+        <mat-icon (click)="back()" matTooltip="back" color="primary">arrow_back</mat-icon>
+    </div>
+
+    <div class="cover" class="mt-1">
+        <app-edit-roles [role]="currentRole"></app-edit-roles>
+    </div>
+
+</div>

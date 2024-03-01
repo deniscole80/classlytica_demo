@@ -1,0 +1,40 @@
+<div class="page-flex">
+    <div class="side-nav">
+        <div class="top-height">
+            <div class="logo">
+                <img src="assets/images/app_logo_white.png" width="180" alt="logo">
+            </div>
+
+            <div class="header-section">
+                Welcome to Classlytica
+            </div>
+
+            <div class="sub-section mt-1">
+                Enter your personal details here and start your journey with us
+            </div>
+        </div>
+    
+        
+        <div class="bottom-section">
+            <img class="image-positoning" src="assets/images/signup_background.png" alt="">
+        </div>
+    </div>
+
+    <div class="login-section">
+        <div class="signup-height">
+            <div class="sigup-header-section">Create Account</div>
+            <mat-slide-toggle class="mt-2" color="primary" [(ngModel)]="signupType">
+                {{signupType ? 'School' : 'User'}}
+            </mat-slide-toggle>
+        </div>
+
+        <div *ngIf="!signupType">
+            <app-sign-up></app-sign-up>
+        </div>
+
+        <div *ngIf="signupType">
+            <app-sign-up-school></app-sign-up-school>
+        </div>
+    </div>
+</div>
+

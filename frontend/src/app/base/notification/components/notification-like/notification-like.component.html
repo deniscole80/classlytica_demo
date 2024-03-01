@@ -1,0 +1,68 @@
+<div *ngIf="!loading && !error && allNotifications.length > 0" >
+    <div [ngClass]="{'white-container': i % 2 == 0, 'smoke-container': i % 2 == 1}"
+    *ngFor="let notification of allNotifications; let i = index">
+        <div class="flex-el avatar-width">
+            <div class="profile" style="cursor: pointer;" (click)="getProfile(notification)">
+                <img class="avatar" *ngIf="notification?.user?.profile_img != null"
+                [src]="profileUrl + notification?.user.profile_img" alt="">
+                <img class="avatar" *ngIf="notification?.school?.profile_img != null"
+                [src]="profileUrl + notification?.school.profile_img " alt="">
+                <img class="avatar" 
+                *ngIf="notification?.user?.profile_img == null && notification?.school?.profile_img == null" src="/assets/images/nomad.svg">
+            </div>
+
+            &nbsp;
+            &nbsp;
+
+            <div>
+                <div (click)="getProfile(notification)" style="cursor: pointer;"
+                class="name">
+                {{notification?.user ? notification?.user.first_name + ' ' + notification?.user.last_name : notification?.school.school_name}}
+                </div>
+                <div (click)="getProfile(notification)" style="cursor: pointer;" class="username">
+                    @{{notification?.user ? notification?.user.username : notification?.school.username}}
+                </div>
+            </div>
+        </div>
+
+        <div class="description">
+            <div class="font">liked your post</div>
+            <div class="font">{{getTime(notification?.createdAt)}}</div>
+        </div>
+
+        <div style="position: relative;" *ngIf="notification?.post.image != null || notification?.post.video != null" class="post">
+            <img class="post-avatar"  *ngIf="notification?.post.image" [src]="imageUrl + notification?.post.image[0]">
+
+            <div style="position: absolute;" *ngIf="notification?.post.video"><mat-icon>play_circle</mat-icon></div>
+            <video class="full-width video-avatar feed-radius" *ngIf="notification?.post.video">
+                <source [src]="videoUrl + notification?.post.video" type="video/mp4">
+                <source [src]="videoUrl + notification?.post.video" type="video/ogg">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    
+        <div *ngIf="notification?.post.image == null && notification?.post.video == null"  class="post-none">
+            <img class="none-avatar" src="/assets/images/none.svg">
+        </div>
+    </div>
+</div>
+
+<div class="flex-center page-height" *ngIf="loading">
+    <app-app-loader></app-app-loader>
+</div>
+
+<div class="flex-center page-height" *ngIf="!loading && error">
+    <app-error-state [message]="error" (retry)="getNotifications()"></app-error-state>
+</div>
+
+<div class="flex-center page-height" *ngIf="!loading && !error && allNotifications.length == 0">
+    <app-empty-state [message]="'No likes'" [image]="'like'"></app-empty-state>
+</div>
+
+<div *ngIf="moreLoading" class="more-positioning mt-1">
+    <mat-progress-spinner
+    diameter="30"
+    color="primary"
+    mode="indeterminate">
+    </mat-progress-spinner>
+</div>
