@@ -4,7 +4,7 @@ module.exports = {
   environment: "dev",
   db_name: "postgres",
   db_username: "denis",
-  db_password: "@Abuja123Office",
+  db_password: "Password",
   db_host: "classlytica-dev.postgres.database.azure.com",
   db_dialect: "postgres",
 };
